@@ -18,4 +18,12 @@ Phenomenon() {
 	// TODO Auto-generated destructor stub
 }
 
+double get_val_phen () const {
+	return val_phen_;
+}
+
+void update_val_phen () {
+	// TODO complete this function
+}
+
 } /* namespace Phenomenon */

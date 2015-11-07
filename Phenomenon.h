@@ -14,6 +14,13 @@ class Phenomenon {
 public:
 	Phenomenon();
 	virtual ~Phenomenon();
+
+	double get_val_phen () const;
+
+	void update_val_phen ();
+
+private:
+	double val_phen_;
 };
 
 } /* namespace Phenomenon */
