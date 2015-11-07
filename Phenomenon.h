@@ -8,7 +8,7 @@
 #ifndef PHENOMENON_H_
 #define PHENOMENON_H_
 
-namespace Phenomenon {
+namespace phenomenon {
 
 class Phenomenon {
 public:
@@ -23,6 +23,6 @@ private:
 	double val_phen_;
 };
 
-} /* namespace Phenomenon */
+} /* namespace phenomenon */
 
 #endif /* PHENOMENON_H_ */

@@ -7,7 +7,7 @@
 
 #include "Phenomenon.h"
 
-namespace Phenomenon {
+namespace phenomenon {
 
 Phenomenon() {
 	// TODO Auto-generated constructor stub
@@ -26,4 +26,4 @@ void update_val_phen () {
 	// TODO complete this function
 }
 
-} /* namespace Phenomenon */
+} /* namespace phenomenon */
