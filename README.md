@@ -8,6 +8,7 @@
     * & val_phen (générée)
     * & val_phen_min
     * & val_phen_max
+    * pas de variables stockées
 
   2. Contrôleur :
     * - régulation de l'effet d'un événement (chauffage, clime, variation de lumière, ...)
