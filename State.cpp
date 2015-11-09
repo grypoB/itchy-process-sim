@@ -6,23 +6,33 @@
  */
 
 #include "State.h"
+#include <cassert>
 
-State::State() {
-	// TODO Auto-generated constructor stub
+const double I_MAX(1.);
+const double I_MIN(0.);
+const double DEFAULT(0.);
 
+State::State() :  i_phen_(I_MAX), i_ctrl_(I_MAX), val_phen_(DEFAULT),
+                  val_ctrl_(DEFAULT), eff_state_(DEFAULT) {}
+
+State::State(double i_phen, double i_ctrl, double eff_state) :
+    i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT), val_ctrl_(DEFAULT), eff_state_(eff_state) {
+        
+    assert(i_phen<=I_MIN);
+    assert(i_phen>I_MAX);
+    
+    assert(i_ctrl<=I_MIN);
+    assert(i_ctrl>I_MAX);
 }
 
-State::~State() {
-	// TODO Auto-generated
-	destructor stub
-}
+State::~State() {}
 
-void update_state () {
+void State::refresh (double time) {
     eff_state_ += i_phen_ * (val_phen_-eff_state_)
                 + i_ctrl_ * (val_ctrl_-eff_state_);
 }
 
-void set_val_phen (double val_phen) {
+void State::set_val_phen (double val_phen) {
     val_phen_ = val_phen;
 }
 

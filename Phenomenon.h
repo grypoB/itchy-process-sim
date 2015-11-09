@@ -12,15 +12,18 @@
 
 class Phenomenon {
 public:
+
 	Phenomenon();
+	Phenomenon(State* pState, double val_phen_min, double val_phen_max);
 	virtual ~Phenomenon();
 
-	void update_val_phen (double time);
+	void refresh (double time);
 
 private:
-	State* const pState;
-	double val_phen_min;
-	double val_phen_max;
+
+	State* const pState_;
+	const double val_phen_min_;
+	const double val_phen_max_;
 	
 protected:
 
