@@ -22,3 +22,7 @@ void update_state () {
                 + i_ctrl_ * (val_ctrl_-eff_state_);
 }
 
+void set_val_phen (double val_phen) {
+    val_phen_ = val_phen;
+}
+

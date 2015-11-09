@@ -6,8 +6,7 @@
  */
 
 #include "Phenomenon.h"
-
-namespace phenomenon {
+#include "State.h"
 
 Phenomenon() {
 	// TODO Auto-generated constructor stub
@@ -18,12 +17,16 @@ Phenomenon() {
 	// TODO Auto-generated destructor stub
 }
 
-double get_val_phen () const {
-	return val_phen_;
+void update_val_phen (double time) {
+    
+    double val_phen;
+	// TODO mettre assert sur valeur
+	val_phen = val_phen_gen(time);
+	
+	pState->set_val_phen(val_phen);
 }
 
-void update_val_phen () {
-	// TODO complete this function
+double val_phen_gen(double time) {
+    
+    return time;
 }
-
-} /* namespace phenomenon */

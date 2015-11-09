@@ -14,7 +14,9 @@ public:
 	State();
 	virtual ~State();
 
-	void update_state ();
+	void update_state();
+	
+	void set_val_phen(double val_phen);
 
 private:
 

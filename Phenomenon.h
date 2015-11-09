@@ -8,21 +8,23 @@
 #ifndef PHENOMENON_H_
 #define PHENOMENON_H_
 
-namespace phenomenon {
+#include "State.h"
 
 class Phenomenon {
 public:
 	Phenomenon();
 	virtual ~Phenomenon();
 
-	double get_val_phen () const;
-
-	void update_val_phen ();
+	void update_val_phen (double time);
 
 private:
-	double val_phen_;
-};
+	State* const pState;
+	double val_phen_min;
+	double val_phen_max;
+	
+protected:
 
-} /* namespace phenomenon */
+    virtual double val_phen_gen(double time);
+};
 
 #endif /* PHENOMENON_H_ */
