@@ -2,7 +2,11 @@
 EXEC = domotique.x
 
 CXX      = g++
-CXXFLAGS = -Wall -Wextra -pedantic -std=c++11 -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion -Wsign-conversion
+CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat-equal \
+-Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion \
+-Wshadow -Weffc++ -Wredundant-decls -Winit-self -Wswitch-default \
+-Wswitch-enum -Wundef -Winline -Wsign-conversion
+# -std=c++11
 CPPFILES = Aera.cpp Controller.cpp Phenomenon.cpp Server.cpp State.cpp
 
 OFILES = $(CPPFILES:.cpp=.o)
