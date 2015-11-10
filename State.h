@@ -12,9 +12,15 @@
 class State {
 public:
 	State();
+	State(double i_phen, double i_ctrl, double eff_state);
 	virtual ~State();
 
-	void update_state ();
+	void refresh(double time);
+	
+	void set_val_phen(double val_phen);
+	
+	double get_val_phen() const;
+	double get_val_state() const;
 
 private:
 
@@ -24,6 +30,6 @@ private:
 	double val_phen_;
 	double val_ctrl_;
 	double eff_state_;
-}
+};
 
 #endif /* STATE_H_ */

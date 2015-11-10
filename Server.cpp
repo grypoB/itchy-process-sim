@@ -7,15 +7,7 @@
 
 #include "Server.h"
 
-namespace server {
+Server::Server() {}
 
-Server::Server() {
-	// TODO Auto-generated constructor stub
+Server::~Server() {}
 
-}
-
-Server::~Server() {
-	// TODO Auto-generated destructor stub
-}
-
-} /* namespace server */

@@ -9,22 +9,23 @@
 #define CONTROLLER_H_
 
 #include "State.h"
-
-namespace controller {
+#include "Server.h"
 
 class Controller {
 public:
 	Controller();
+	Controller(State* pState, Server* pServer, double val_start, double val_stop);
 	virtual ~Controller();
 
-	void update_ctrl ();
+	void refresh (double time);
 
 private:
-	Server* server_;
-	State* state_;
+	State* pState_;
+	Server* pServer_;
+	
+	const double val_start_;
+	const double val_stop_;
 
 };
-
-} /* namespace controller */
 
 #endif /* CONTROLLER_H_ */
