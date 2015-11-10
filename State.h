@@ -18,6 +18,9 @@ public:
 	void refresh(double time);
 	
 	void set_val_phen(double val_phen);
+	
+	double get_val_phen() const;
+	double get_val_state() const;
 
 private:
 

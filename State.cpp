@@ -36,3 +36,10 @@ void State::set_val_phen (double val_phen) {
     val_phen_ = val_phen;
 }
 
+double State::get_val_phen() const {
+    return val_phen_;
+}
+
+double State::get_val_state() const {
+    return eff_state_;
+}
