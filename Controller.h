@@ -10,22 +10,19 @@
 
 #include "State.h"
 #include "Server.h"
+#include "Agent.h"
 
-class Controller {
+class Controller: public Agent {
 public:
 	Controller();
-	Controller(State* pState, Server* pServer, double val_start, double val_stop);
+	Controller(State* pState, Server* pServer);
 	virtual ~Controller();
 
-	void refresh (double time);
+	virtual void refresh(double time);
 
 private:
-	State* pState_;
+	State*  pState_;
 	Server* pServer_;
-	
-	const double val_start_;
-	const double val_stop_;
-
 };
 
 #endif /* CONTROLLER_H_ */

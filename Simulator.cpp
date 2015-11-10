@@ -1,17 +1,18 @@
+#include "Simulator.h"
 #include <cassert>
 
-Simulator::Simulator() : pAgents(0,0) {}
+Simulator::Simulator() : pAgents_(0,0) {}
 
-void addAgent(Agent& agent) {
-    pAgents_.push_back(agent);
+void Simulator::addAgent(Agent& agent) {
+    pAgents_.push_back(&agent);
 }
 
-void run(unsigned int nbTicks, double lenghtTick) {
+void Simulator::run(unsigned int nbTicks, double lenghtTick) {
     double time(.0);
 
-    for (int i=0 ; i<nbTicks ; i++) {
-        for (int j=0 ; j<pAgents_.size() ; j++) {
-            pAgents_.at(j)->run(time);
+    for (unsigned int i=0 ; i<nbTicks ; i++) {
+        for (unsigned int j=0 ; j<pAgents_.size() ; j++) {
+            pAgents_.at(j)->refresh(time);
         }
         time += lenghtTick;
     }

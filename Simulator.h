@@ -12,7 +12,7 @@ class Simulator {
         void run(unsigned int nbTicks, double lenghtTick); // run the agents in the order they were added
 
     private:
-        vector<Agent*> pAgents_;
-}
+        std::vector<Agent*> pAgents_;
+};
 
 #endif

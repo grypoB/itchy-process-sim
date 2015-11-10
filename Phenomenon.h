@@ -9,6 +9,7 @@
 #define PHENOMENON_H_
 
 #include "State.h"
+#include "Agent.h"
 
 class Phenomenon {
 public:
@@ -17,7 +18,7 @@ public:
 	Phenomenon(State* pState, double val_phen_min, double val_phen_max);
 	virtual ~Phenomenon();
 
-	void refresh (double time);
+	virtual void refresh (double time);
 
 private:
 

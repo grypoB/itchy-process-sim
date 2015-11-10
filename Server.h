@@ -1,17 +1,21 @@
-/*
- * Server.h
- *
- *  Created on: Nov 2, 2015
- *      Author:
- */
-
 #ifndef SERVER_H_
 #define SERVER_H_
 
-class Server {
-public:
-	Server();
-	virtual ~Server();
+#include "Agent.h"
+#include <string>
+#include <vector>
+
+class Server: public Agent {
+    public:
+        Server();
+
+        virtual void refresh(double time);
+
+        // stub for com protocol
+        void send(double timeStamp, double val);
+
+    private:
+        std::vector<std::string> buffer_;
 };
 
 #endif /* SERVER_H_ */
