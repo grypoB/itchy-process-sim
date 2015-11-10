@@ -7,8 +7,7 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wshadow -Weffc++ -Wredundant-decls -Winit-self -Wswitch-default \
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11
-CPPFILES = Aera.cpp Controller.cpp Phenomenon.cpp Server.cpp State.cpp
-
+CPPFILES = Controller.cpp Phenomenon.cpp Server.cpp Simulator.cpp State.cpp main.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -36,8 +35,9 @@ clean:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-Aera.o: Aera.cpp Aera.h Phenomenon.h State.h Controller.h Server.h
-Controller.o: Controller.cpp Controller.h State.h Phenomenon.h
-Phenomenon.o: Phenomenon.cpp Phenomenon.h
-Server.o: Server.cpp Server.h
-State.o: State.cpp State.h Phenomenon.h
+Controller.o: Controller.cpp Controller.h State.h Server.h Agent.h
+Phenomenon.o: Phenomenon.cpp Phenomenon.h State.h Agent.h
+Server.o: Server.cpp Server.h Agent.h
+Simulator.o: Simulator.cpp Simulator.h Agent.h
+State.o: State.cpp State.h
+main.o: main.cpp
