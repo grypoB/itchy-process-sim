@@ -18,11 +18,11 @@ State::State() :  i_phen_(I_MAX), i_ctrl_(I_MAX), val_phen_(DEFAULT),
 State::State(double i_phen, double i_ctrl, double eff_state) :
     i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT), val_ctrl_(DEFAULT), eff_state_(eff_state) {
         
-    assert(i_phen<=I_MIN);
-    assert(i_phen>I_MAX);
+    assert(i_phen>=I_MIN);
+    assert(i_phen<=I_MAX);
     
-    assert(i_ctrl<=I_MIN);
-    assert(i_ctrl>I_MAX);
+    assert(i_ctrl>=I_MIN);
+    assert(i_ctrl<=I_MAX);
 }
 
 State::~State() {}

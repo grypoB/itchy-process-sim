@@ -12,7 +12,7 @@ class Server: public Agent {
         virtual void refresh(double time);
 
         // stub for com protocol
-        void send(double timeStamp, double val);
+        void send(std::string legend, double val);
 
     private:
         std::vector<std::string> buffer_;

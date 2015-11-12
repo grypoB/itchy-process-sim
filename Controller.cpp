@@ -28,6 +28,6 @@ void Controller::refresh (double time) {
     // TODO implement this function // format d'envoi des infos
     
     // stub
-    pServer_->send(time, val_phen); 
-    pServer_->send(time, val_state); 
+    pServer_->send("phenomenon", val_phen);
+    pServer_->send("state", val_state);
 }
