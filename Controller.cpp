@@ -5,13 +5,11 @@
  *      Author:
  */
 
+#include <cassert>
+
 #include "Controller.h"
-#include "State.h"
-#include "Server.h"
 
-// TODO check wether this constant must be in a namespace
-
-Controller::Controller() : pState_(NULL), pServer_(NULL) {} // TODO garder le constructeur par défaut ?
+Controller::Controller() : pState_(NULL), pServer_(NULL) {}
 
 Controller::Controller(State* pState, Server* pServer)
     : pState_(pState), pServer_(pServer) {}
@@ -19,15 +17,20 @@ Controller::Controller(State* pState, Server* pServer)
 Controller::~Controller() {}
 
 void Controller::refresh (double time) {
-    double val_phen;
-    double val_state;
+    double val_phen (.0);
+    double val_ctrl (.0);
+    double val_state(.0);
   
+    assert(pState_!=NULL && pServer_!=NULL);
+
+    val_phen  = pState_->get_val_phen() ;
+    val_ctrl  = pState_->get_val_ctrl() ;
     val_state = pState_->get_val_state();
-    val_phen  = pState_->get_val_phen(); 
     
-    // TODO implement this function // format d'envoi des infos
+    pState_->set_val_ctrl(val_state); // so ctrl has no effect
     
-    // stub
-    pServer_->send("phenomenon", val_phen);
-    pServer_->send("state", val_state);
+    // TODO check server format output
+    pServer_->send("phenomenon", val_phen );
+    pServer_->send("state",      val_state);
+    pServer_->send("ctrl",       val_ctrl );
 }
