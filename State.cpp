@@ -8,7 +8,7 @@
 #include "State.h"
 #include <cassert>
 
-// TODO put in namespace ? chack with teacher
+// TODO put in namespace ? check with teacher
 const double I_MAX(1.); // influence factor max/min
 const double I_MIN(0.);
 const double DEFAULT(0.);
