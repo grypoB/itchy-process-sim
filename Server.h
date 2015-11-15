@@ -16,6 +16,7 @@ class Server: public Agent {
 
     private:
         std::vector<std::string> buffer_;
+        std::string name_;
 };
 
 #endif /* SERVER_H_ */
