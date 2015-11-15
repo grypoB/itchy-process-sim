@@ -46,6 +46,6 @@ void Phenomenon::refresh (double time) {
 	}
 }
 
-double Phenomenon::val_phen_gen(double time) {
+double Phenomenon::gen_val_phen(double time) {
     return time;
 }

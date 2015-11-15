@@ -28,7 +28,7 @@ class Phenomenon: public Agent{
 
     protected:
 
-        virtual double val_phen_gen(double time);
+        virtual double gen_val_phen(double time);
 };
 
 #endif /* PHENOMENON_H_ */
