@@ -1,6 +1,9 @@
 #include "Server.h"
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
+#include <map>
 
 const std::string DEFAULT_NAME("JARVIS.txt");
 
@@ -24,7 +27,6 @@ Server::~Server() {
     }
 }
 
-
 void Server::refresh(double time) {
     using namespace std;
     
@@ -38,11 +40,18 @@ void Server::refresh(double time) {
 }
 
 void Server::send(std::string legend, double val) {
+    
     // TODO how sort the data for gnuplot ?
     buffer_.push_back(legend + " " + double_to_string(val));
 }
 
-
+void Server::introduce(std::vector<std::string> mesure_name) {
+    using namespace std;
+    
+    for (vector<string>::iterator it = mesure_name.begin() ; it != mesure_name.end(); it++) {
+        data_name_.push_back(*it);
+    }
+}
 
 
 std::string double_to_string(double val) {
