@@ -4,10 +4,13 @@
 #include "Agent.h"
 #include <string>
 #include <vector>
+#include <fstream>
 
 class Server: public Agent {
     public:
         Server();
+        Server(std::string filename);
+        ~Server();
 
         virtual void refresh(double time);
 
@@ -16,7 +19,8 @@ class Server: public Agent {
 
     private:
         std::vector<std::string> buffer_;
-        std::string name_;
+        std::string fName_;
+        std::ofstream file_;
 };
 
 #endif /* SERVER_H_ */

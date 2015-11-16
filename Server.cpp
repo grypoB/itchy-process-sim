@@ -1,36 +1,40 @@
 #include "Server.h"
-#include <fstream>
 #include <iostream>
 #include <sstream>
-#include <string>
 
-const std::string DEFAULT_NAME("JARVIS");
+const std::string DEFAULT_NAME("JARVIS.txt");
 
 std::string double_to_string(double val);
 
-Server::Server() : buffer_(0,""), name_(DEFAULT_NAME) {}
+Server::Server() : buffer_(0,""), fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app) {
+    if (file_.fail()) {
+        std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
+    }
+}
+
+Server::Server(std::string filename) : buffer_(0,""), fName_(filename), file_(fName_.c_str(), std::ios::app) {
+    if (file_.fail()) {
+        std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
+    }
+}
+
+Server::~Server() {
+    if (file_.is_open()) {
+        file_.close();
+    }
+}
 
 
 void Server::refresh(double time) {
     using namespace std;
-    static string dest_file(name_+".txt");
-    ofstream f_dest(dest_file.c_str(), ios::app); // add the data at the end of the file
     
     cout << "t=" << time << "  Server output" << endl;
-     
-    if (f_dest) {
-        for (unsigned int i=0 ; i<buffer_.size() ; i++) {
-            cout << buffer_.at(i) << endl;
-            f_dest << buffer_.at(i) << endl;
-        }
+    for (unsigned int i=0 ; i<buffer_.size() ; i++) {
+        cout << buffer_.at(i) << endl;
+        if(file_.is_open()) {file_ << buffer_.at(i) << endl; }
+    }
         
         buffer_.clear();
-        f_dest.close();
-    }
-    
-    else {
-        cout << "Erreur d'ouverture de fichier" << endl;
-    }
 }
 
 void Server::send(std::string legend, double val) {
