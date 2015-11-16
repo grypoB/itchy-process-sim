@@ -20,7 +20,6 @@ class Server: public Agent {
         
 
     private:
-        std::vector<std::string> buffer_;
         std::string fName_;
         std::ofstream file_;
         std::vector<std::string> data_name_;

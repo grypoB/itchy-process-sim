@@ -9,13 +9,13 @@ const std::string DEFAULT_NAME("JARVIS.txt");
 
 std::string double_to_string(double val);
 
-Server::Server() : buffer_(0,""), fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app) {
+Server::Server() : fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app), data_name_(0,""), data_() { // TODO default constructor for data_ ?
     if (file_.fail()) {
         std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
     }
 }
 
-Server::Server(std::string filename) : buffer_(0,""), fName_(filename), file_(fName_.c_str(), std::ios::app) {
+Server::Server(std::string filename) : fName_(filename), file_(fName_.c_str(), std::ios::app), data_name_(0,"") {// TODO default constructor for data_ ?
     if (file_.fail()) {
         std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
     }
@@ -30,19 +30,31 @@ Server::~Server() {
 void Server::refresh(double time) {
     using namespace std;
     
+    map<string,double>::iterator itm;
+    
     cout << "t=" << time << "  Server output" << endl;
-    for (unsigned int i=0 ; i<buffer_.size() ; i++) {
-        cout << buffer_.at(i) << endl;
-        if(file_.is_open()) {file_ << buffer_.at(i) << endl; }
+    
+    for (vector<string>::iterator its = data_name_.begin() ; its != data_name_.end(); its++) {
+        
+        if(data_.find(*its)!=data_.end()) {
+		    file_ << itm->second << + "\t"; // TODO use iomanip
+		}
+
+		else {
+            file_ << " - \t";
+        }
     }
         
-        buffer_.clear();
+    data_.clear();
 }
 
 void Server::send(std::string legend, double val) {
+    using namespace std;
     
-    // TODO how sort the data for gnuplot ?
-    buffer_.push_back(legend + " " + double_to_string(val));
+    map<string,double>::iterator it;
+    
+    it = data_.find(legend);
+    it->second = val;
 }
 
 void Server::introduce(std::vector<std::string> mesure_name) {
@@ -50,12 +62,16 @@ void Server::introduce(std::vector<std::string> mesure_name) {
     
     for (vector<string>::iterator it = mesure_name.begin() ; it != mesure_name.end(); it++) {
         data_name_.push_back(*it);
+        data_[*it];
     }
+    
+    // TODO Add the content of data_name_ as commentar in files
 }
 
 
 std::string double_to_string(double val) {
     using namespace std;
+    
     ostringstream oss;
     
     oss << val;
