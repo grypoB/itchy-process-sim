@@ -11,7 +11,7 @@ int main (int argc, char *argv[]) {
 
     std::cout << "Initialization..." << std::endl;
 
-    Server server;
+    Server server("tata.dat");
     cout << "Server OK" << endl;
     State s(1,0,0);
     cout << "State OK" << endl;
@@ -25,8 +25,8 @@ int main (int argc, char *argv[]) {
     cout << endl << "Fasten yout seatbelt" << endl;
     
     sim.addAgent(p);
-    sim.addAgent(s); // TODO invert to not have the actual value to server bu t-1
     sim.addAgent(c);
+    sim.addAgent(s);
     sim.addAgent(server);
 
     cout << "Here we go" << endl;
