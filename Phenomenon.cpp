@@ -26,7 +26,7 @@ void Phenomenon::refresh (double time) {
     using namespace std;
     double val_phen;
     
-	val_phen = val_phen_gen(time);
+	val_phen = gen_val_phen(time);
 	
 	// TODO faire des exception pour envoyer message si valeur limites dépassées ?
 	
