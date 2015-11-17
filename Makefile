@@ -7,7 +7,7 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wshadow -Weffc++ -Wredundant-decls -Winit-self -Wswitch-default \
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11
-CPPFILES = Controller.cpp Phenomenon.cpp Server.cpp Simulator.cpp State.cpp main.cpp
+CPPFILES = Controller.cpp Phenomenon.cpp RngPhenomenon.cpp Server.cpp Simulator.cpp State.cpp main.cpp random.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -35,9 +35,13 @@ clean:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-Controller.o: Controller.cpp Controller.h State.h Server.h Agent.h
+Controller.o: Controller.cpp Controller.h State.h Agent.h Server.h
 Phenomenon.o: Phenomenon.cpp Phenomenon.h State.h Agent.h
+RngPhenomenon.o: RngPhenomenon.cpp RngPhenomenon.h Phenomenon.h State.h \
+  Agent.h random.h
 Server.o: Server.cpp Server.h Agent.h
 Simulator.o: Simulator.cpp Simulator.h Agent.h
-State.o: State.cpp State.h
-main.o: main.cpp
+State.o: State.cpp State.h Agent.h
+main.o: main.cpp Simulator.h Agent.h Controller.h State.h Server.h \
+  RngPhenomenon.h Phenomenon.h
+random.o: random.cpp random.h

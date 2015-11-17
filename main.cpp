@@ -4,7 +4,7 @@
 
 #include "Simulator.h"
 #include "Controller.h"
-#include "Phenomenon.h"
+#include "RngPhenomenon.h"
 
 int main (int argc, char *argv[]) {
     using namespace std;
@@ -15,7 +15,7 @@ int main (int argc, char *argv[]) {
     cout << "Server OK" << endl;
     State s(1,0,0);
     cout << "State OK" << endl;
-    Phenomenon p(&s, -1, 100);
+    RngPhenomenon p(&s, -1, 100);
     cout << "Phenomenon OK" << endl;
     Controller c(&s, &server);
     cout << "Controller OK" << endl;
