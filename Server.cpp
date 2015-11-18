@@ -29,14 +29,16 @@ Server::~Server() {
 
 void Server::refresh(double time) {
     using namespace std;
-    
+
     map<string,double>::iterator itm;
-    
+    vector<string>::iterator its;
+
     cout << "t=" << time << "  Server output" << endl;
-    
-    for (vector<string>::iterator its = data_name_.begin() ; its != data_name_.end(); its++) {
+
+    for (its = data_name_.begin(); its != data_name_.end(); its++) {
         
-        if(data_.find(*its)!=data_.end()) {
+        itm = data_.find(*its);
+        if(itm!=data_.end()) {
 		    file_ << itm->second << + "\t"; // TODO use iomanip
 		}
 
@@ -44,37 +46,38 @@ void Server::refresh(double time) {
             file_ << " - \t";
         }
     }
-        
+    
+	file_ << endl;
     data_.clear();
 }
 
 void Server::send(std::string legend, double val) {
     using namespace std;
-    
+
     map<string,double>::iterator it;
-    
+
     it = data_.find(legend);
     it->second = val;
 }
 
 void Server::introduce(std::vector<std::string> mesure_name) {
     using namespace std;
-    
+
     for (vector<string>::iterator it = mesure_name.begin() ; it != mesure_name.end(); it++) {
         data_name_.push_back(*it);
         data_[*it];
     }
-    
+
     // TODO Add the content of data_name_ as commentar in files
 }
 
 
 std::string double_to_string(double val) {
     using namespace std;
-    
+
     ostringstream oss;
-    
+
     oss << val;
-    
+
     return oss.str();
 }
