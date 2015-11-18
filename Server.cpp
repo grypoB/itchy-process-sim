@@ -34,33 +34,35 @@ void Server::refresh(double time) {
     
     cout << "t=" << time << "  Server output" << endl;
     
+    cout << data_name_.size();
     for (vector<string>::iterator its = data_name_.begin() ; its != data_name_.end(); its++) {
+        cout << "hey" << endl;
         
         if(data_.find(*its)!=data_.end()) {
+            // TODO undefined itm
 		    file_ << itm->second << + "\t"; // TODO use iomanip
+		    cout << itm->second << + "\t"; // TODO use iomanip
 		}
-
 		else {
             file_ << " - \t";
+            cout << " - \t";
         }
+        cout << "hey" << endl;
     }
-        
+    file_ << endl; 
+    cout << endl; 
+
     data_.clear();
 }
 
 void Server::send(std::string legend, double val) {
-    using namespace std;
-    
-    map<string,double>::iterator it;
-    
-    it = data_.find(legend);
-    it->second = val;
+    data_[legend] = val; 
 }
 
-void Server::introduce(std::vector<std::string> mesure_name) {
+void Server::introduce(std::vector<std::string> measure_name) {
     using namespace std;
     
-    for (vector<string>::iterator it = mesure_name.begin() ; it != mesure_name.end(); it++) {
+    for (vector<string>::iterator it = measure_name.begin() ; it != measure_name.end(); it++) {
         data_name_.push_back(*it);
         data_[*it];
     }
