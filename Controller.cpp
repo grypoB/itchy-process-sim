@@ -34,3 +34,16 @@ void Controller::refresh (double) {
     pServer_->send("state",      val_state);
     pServer_->send("ctrl",       val_ctrl );
 }
+
+void Controller::init() {
+    using namespace std;
+    vector<string> legendKeys(0,"");
+
+    if(pServer_!=NULL) {
+        legendKeys.push_back("phenomenon");
+        legendKeys.push_back("state");
+        legendKeys.push_back("ctrl");
+
+        pServer_->introduce(legendKeys);
+    }
+}

@@ -19,6 +19,7 @@ class Controller: public Agent {
         virtual ~Controller();
 
         virtual void refresh(double time);
+        virtual void init();
 
     private:
         State*  pState_;
