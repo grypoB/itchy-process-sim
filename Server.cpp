@@ -9,13 +9,13 @@ const std::string DEFAULT_NAME("JARVIS.txt");
 
 std::string double_to_string(double val);
 
-Server::Server() : fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app), data_name_(0,""), data_() { // TODO default constructor for data_ ?
+Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app), data_name_(0,""), data_() { // TODO default constructor for data_ ?
     if (file_.fail()) {
         std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
     }
 }
 
-Server::Server(std::string filename) : fName_(filename), file_(fName_.c_str(), std::ios::app), data_name_(0,"") {// TODO default constructor for data_ ?
+Server::Server(std::string filename) : Agent(), fName_(filename), file_(fName_.c_str(), std::ios::app), data_name_(0,"") {// TODO default constructor for data_ ?
     if (file_.fail()) {
         std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
     }

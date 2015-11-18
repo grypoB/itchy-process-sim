@@ -8,9 +8,9 @@
 #include "Phenomenon.h"
 #include <cstddef>
 
-Phenomenon::Phenomenon() : pState_(NULL) {}
+Phenomenon::Phenomenon() : Agent(), pState_(NULL) {}
 
-Phenomenon::Phenomenon(State* pState) : pState_(pState) {}
+Phenomenon::Phenomenon(State* pState) : Agent(), pState_(pState) {}
 
 Phenomenon::~Phenomenon() {}
 

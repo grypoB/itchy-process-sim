@@ -9,14 +9,14 @@
 
 #include "Controller.h"
 
-Controller::Controller() : pState_(NULL), pServer_(NULL) {}
+Controller::Controller() : Agent(), pState_(NULL), pServer_(NULL) {}
 
 Controller::Controller(State* pState, Server* pServer)
-    : pState_(pState), pServer_(pServer) {}
+    : Agent(), pState_(pState), pServer_(pServer) {}
 
 Controller::~Controller() {}
 
-void Controller::refresh (double time) {
+void Controller::refresh (double) {
     double val_phen (.0);
     double val_ctrl (.0);
     double val_state(.0);
