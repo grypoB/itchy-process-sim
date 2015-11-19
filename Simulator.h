@@ -9,10 +9,10 @@ class Simulator {
         Simulator();
 
         void addAgent(Agent& agent);
-        void run(unsigned int nbTicks, double lenghtTick); // run the agents in the order they were added
+        void run(unsigned int nbTicks, double lenghtTick);
 
     private:
-        std::vector<Agent*> pAgents_;
+        std::vector<Agent*> pAgents_; // Agent the simulator has to run
 };
 
 #endif

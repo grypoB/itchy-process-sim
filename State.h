@@ -1,10 +1,3 @@
-/*
- * State.h
- *
- *  Created on: Nov 2, 2015
- *      Author:
- */
-
 #ifndef STATE_H_
 #define STATE_H_
 
@@ -16,7 +9,8 @@ class State: public Agent {
         State(double i_phen, double i_ctrl, double eff_state);
         virtual ~State();
 
-        void refresh(double time);
+        virtual void refresh(double time);
+        virtual void init();
 
         void set_val_phen(double val_phen);
         void set_val_ctrl(double val_phen);
@@ -26,13 +20,14 @@ class State: public Agent {
         double get_val_ctrl() const;
 
     private:
-
         const double i_phen_; // influence factor of phenomenom in [1/s]
         const double i_ctrl_; // influence factor of controller in [1/s]
 
-        double val_phen_;
-        double val_ctrl_;
-        double eff_state_;
+        double val_phen_;  // value of phenomenon influencing the state
+        double val_ctrl_;  // value of the controller influencing the state
+        double val_state_; // current value of the state
+
+        double prevTime_; // time at which refresh was last called
 };
 
-#endif /* STATE_H_ */
+#endif

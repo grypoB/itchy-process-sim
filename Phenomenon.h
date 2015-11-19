@@ -9,7 +9,6 @@
 #define PHENOMENON_H_
 
 #include "State.h"
-#include "Agent.h"
 
 class Phenomenon: public Agent{
     public:

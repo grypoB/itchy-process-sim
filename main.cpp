@@ -1,12 +1,10 @@
-#include <cstdlib>
-#include <cstdio>
 #include <iostream>
 
 #include "Simulator.h"
 #include "Controller.h"
 #include "RngPhenomenon.h"
 
-int main (int argc, char *argv[]) {
+int main () {
     using namespace std;
 
     std::cout << "Initialization..." << std::endl;
