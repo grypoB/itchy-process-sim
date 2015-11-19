@@ -27,33 +27,44 @@ Server::~Server() {
     }
 }
 
+/**
+ * @send the data to the file
+ */
 void Server::refresh(double time) {
     using namespace std;
 
     vector<string>::iterator its;
 
     cout << "t=" << time << "  Server output" << endl;
-
+    
     for (its = data_name_.begin(); its != data_name_.end(); its++) {
+        // write down the data if previously setted
         if(data_.find(*its)!=data_.end()) {
 		    file_ << data_[*its] << " "; // TODO use iomanip
-		    cout << *its << " "  << data_[*its] << endl; // TODO use iomanip
+		    cout << *its << " "  << data_[*its] << endl;
 		}
 		else {
             file_ << "- ";
             cout << "- ";
         }
     }
-    file_ << endl; 
-    cout << endl; 
+    file_ << endl;
+    cout << endl;
 
     data_.clear();
 }
 
+/**
+ * @stock momentarily the data in the containers
+ */
 void Server::send(std::string legend, double val) {
-    data_[legend] = val; 
+    data_[legend] = val;
 }
 
+
+/**
+ * @initialise the name of the collected data
+ */
 void Server::introduce(std::vector<std::string> measure_name) {
     using namespace std;
     
@@ -65,7 +76,9 @@ void Server::introduce(std::vector<std::string> measure_name) {
     // TODO Add the content of data_name_ as commentar in files
 }
 
-
+/**
+ * @convert double to string
+ */
 std::string double_to_string(double val) {
     using namespace std;
 
