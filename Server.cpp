@@ -1,9 +1,6 @@
 #include "Server.h"
 #include <iostream>
 #include <sstream>
-#include <string>
-#include <vector>
-#include <map>
 
 const std::string DEFAULT_NAME("JARVIS.txt");
 
