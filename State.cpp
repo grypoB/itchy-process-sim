@@ -16,10 +16,10 @@ const double DEFAULT(0.);
 // --------------------------------------------------------------------------
 // Constructors / Destructors
 State::State() : Agent(),  i_phen_(I_MAX), i_ctrl_(I_MAX), val_phen_(DEFAULT),
-                  val_ctrl_(DEFAULT), eff_state_(DEFAULT) {}
+                  val_ctrl_(DEFAULT), val_state_(DEFAULT) {}
 
 State::State(double i_phen, double i_ctrl, double eff_state) :
-    Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT), val_ctrl_(DEFAULT), eff_state_(eff_state) {
+    Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT), val_ctrl_(DEFAULT), val_state_(eff_state) {
         
     assert(i_phen>=I_MIN);
     assert(i_phen<=I_MAX);
@@ -37,8 +37,8 @@ void State::refresh (double time) {
     static double prevTime(.0); // TODO shared between all state instances ==> problem
     double dtime(time-prevTime);
 
-    eff_state_ += i_phen_*dtime * (val_phen_-eff_state_)
-                + i_ctrl_*dtime * (val_ctrl_-eff_state_);
+    val_state_ += i_phen_*dtime * (val_phen_-val_state_)
+                + i_ctrl_*dtime * (val_ctrl_-val_state_);
 
     prevTime = time;
 }
@@ -61,7 +61,7 @@ double State::get_val_phen() const {
 }
 
 double State::get_val_state() const {
-    return eff_state_;
+    return val_state_;
 }
 
 double State::get_val_ctrl() const {

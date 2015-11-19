@@ -30,9 +30,9 @@ class State: public Agent {
         const double i_phen_; // influence factor of phenomenom in [1/s]
         const double i_ctrl_; // influence factor of controller in [1/s]
 
-        double val_phen_;
-        double val_ctrl_;
-        double eff_state_;
+        double val_phen_;     // value of the phenomenon
+        double val_ctrl_;     // value of the controler
+        double val_state_;    // value of the currant state
 };
 
 #endif /* STATE_H_ */
