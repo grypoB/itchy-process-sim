@@ -29,25 +29,20 @@ Server::~Server() {
 
 void Server::refresh(double time) {
     using namespace std;
-    
-    map<string,double>::iterator itm;
-    
+
+    vector<string>::iterator its;
+
     cout << "t=" << time << "  Server output" << endl;
-    
-    cout << data_name_.size();
-    for (vector<string>::iterator its = data_name_.begin() ; its != data_name_.end(); its++) {
-        cout << "hey" << endl;
-        
+
+    for (its = data_name_.begin(); its != data_name_.end(); its++) {
         if(data_.find(*its)!=data_.end()) {
-            // TODO undefined itm
-		    file_ << itm->second << + "\t"; // TODO use iomanip
-		    cout << itm->second << + "\t"; // TODO use iomanip
+		    file_ << data_[*its] << " "; // TODO use iomanip
+		    cout << *its << " "  << data_[*its] << endl; // TODO use iomanip
 		}
 		else {
-            file_ << " - \t";
-            cout << " - \t";
+            file_ << "- ";
+            cout << "- ";
         }
-        cout << "hey" << endl;
     }
     file_ << endl; 
     cout << endl; 
@@ -66,17 +61,17 @@ void Server::introduce(std::vector<std::string> measure_name) {
         data_name_.push_back(*it);
         data_[*it];
     }
-    
+
     // TODO Add the content of data_name_ as commentar in files
 }
 
 
 std::string double_to_string(double val) {
     using namespace std;
-    
+
     ostringstream oss;
-    
+
     oss << val;
-    
+
     return oss.str();
 }

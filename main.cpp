@@ -13,7 +13,7 @@ int main (int argc, char *argv[]) {
 
     Server server("tata.dat");
     cout << "Server OK" << endl;
-    State s(1,0,0);
+    State s(1,1,0);
     cout << "State OK" << endl;
     RngPhenomenon p(&s, -1, 100);
     cout << "Phenomenon OK" << endl;
@@ -32,7 +32,7 @@ int main (int argc, char *argv[]) {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(10,1.1);
+    sim.run(10,1.);
 
     return EXIT_SUCCESS;
 }
