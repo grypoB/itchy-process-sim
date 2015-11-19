@@ -20,10 +20,10 @@ class Server: public Agent {
         
 
     private:
-        std::string fName_;                         // name of the data file
-        std::ofstream file_;                        // output stream for writting data to a file
-        std::vector<std::string> data_name_;        // name of the data
-        std::map<const std::string, double> data_;  // container of data
+        std::string fName_;                                           // name of the data file
+        std::ofstream file_;                                           // output stream for writting data to a file
+        std::vector<std::string> data_name_;             // name of the data
+        std::map<const std::string, double> data_; // container of data
 };
 
 #endif /* SERVER_H_ */

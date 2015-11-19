@@ -7,17 +7,28 @@
 
 const std::string DEFAULT_NAME("JARVIS.txt");
 
+// --------------------------------------------------------------------------
+// Constructors / Destructors
 std::string double_to_string(double val);
 
-Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(), std::ios::app), data_name_(0,""), data_() { // TODO default constructor for data_ ?
+Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
+                   std::ios::app), data_name_(0,""), data_() {
+    using namespace std;
+    
     if (file_.fail()) {
-        std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
+        cout << "Could not open file " << fName_;
+        cout << ". The server won't log in a file." << endl;
     }
 }
 
-Server::Server(std::string filename) : Agent(), fName_(filename), file_(fName_.c_str(), std::ios::app), data_name_(0,"") {// TODO default constructor for data_ ?
+Server::Server(std::string filename) : Agent(), fName_(filename),
+                                       file_(fName_.c_str(), std::ios::app),
+                                       data_name_(0,"") {
+    using namespace std;
+    
     if (file_.fail()) {
-        std::cout << "Could not open file " << fName_ << ". The server won't log in a file." << std::endl;
+        cout << "Could not open file " << fName_;
+        cout << ". The server won't log in a file." << endl;
     }
 }
 
@@ -26,6 +37,9 @@ Server::~Server() {
         file_.close();
     }
 }
+
+// --------------------------------------------------------------------------
+// Redefenition of Agent
 
 /**
  * @send the data to the file
@@ -54,6 +68,10 @@ void Server::refresh(double time) {
     data_.clear();
 }
 
+
+// --------------------------------------------------------------------------
+// Setters
+
 /**
  * @stock momentarily the data in the containers
  */
@@ -68,13 +86,18 @@ void Server::send(std::string legend, double val) {
 void Server::introduce(std::vector<std::string> measure_name) {
     using namespace std;
     
-    for (vector<string>::iterator it = measure_name.begin() ; it != measure_name.end(); it++) {
+    vector<string>::iterator it;
+    
+    for (it = measure_name.begin(); it != measure_name.end(); it++) {
         data_name_.push_back(*it);
-        data_[*it];
     }
 
     // TODO Add the content of data_name_ as commentar in files
 }
+
+
+// --------------------------------------------------------------------------
+// Local functions
 
 /**
  * @convert double to string
