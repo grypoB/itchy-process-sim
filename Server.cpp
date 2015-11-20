@@ -2,11 +2,12 @@
 #include <iostream>
 #include <sstream>
 
-const std::string DEFAULT_NAME("JARVIS.txt");
+namespace {
+    const std::string DEFAULT_NAME("JARVIS.txt");
+}
 
 // --------------------------------------------------------------------------
 // Constructors / Destructors
-std::string double_to_string(double val);
 
 Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
                    std::ios::app), data_name_(0,""), data_() {
@@ -40,6 +41,8 @@ Server::~Server() {
 
 /**
  * @send the data to the file
+ * @see Server::introduce()
+ * @see Server::send
  */
 void Server::refresh(double time) {
     using namespace std;
@@ -90,21 +93,4 @@ void Server::introduce(std::vector<std::string> measure_name) {
     }
 
     // TODO Add the content of data_name_ as commentar in files
-}
-
-
-// --------------------------------------------------------------------------
-// Local functions
-
-/**
- * @convert double to string
- */
-std::string double_to_string(double val) {
-    using namespace std;
-
-    ostringstream oss;
-
-    oss << val;
-
-    return oss.str();
 }

@@ -16,7 +16,7 @@ State::State()
               val_ctrl_(DEFAULT), val_state_(DEFAULT), prevTime_(DEFAULT) {}
 
 /** Construct a ready to use state
- *  @param i_phen,i_ctrl influence factor of respectively phenomenon and
+ *  @param i_phen, i_ctrl influence factor of respectively phenomenon and
  *         controller that might affect it
  *  @param val_state initial value of the state (at t=0)
  */
