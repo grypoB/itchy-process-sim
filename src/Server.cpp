@@ -10,7 +10,7 @@ namespace {
 Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
                    std::ios::app), data_name_(0,""), data_() {
     using namespace std;
-    
+
     if (file_.fail()) {
         cout << "Could not open file " << fName_;
         cout << ". The server won't log in a file." << endl;
@@ -20,9 +20,9 @@ Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
 // Server with specified filename
 Server::Server(std::string filename) : Agent(), fName_(filename),
                                        file_(fName_.c_str(), std::ios::app),
-                                       data_name_(0,"") {
+                                       data_name_(0,""), data_() {
     using namespace std;
-    
+
     if (file_.fail()) {
         cout << "Could not open file " << fName_;
         cout << ". The server won't log in a file." << endl;
@@ -36,7 +36,7 @@ Server::~Server() {
 }
 
 
-/** Output recorded data to cout and file 
+/** Output recorded data to cout and file
  *
  * The file will be formated correctly for gnuplot to parse
  * @see Server::introduce()
@@ -48,7 +48,7 @@ void Server::refresh(double time) {
     vector<string>::iterator its;
 
     cout << "t=" << time << "  Server output" << endl;
-    
+
     for (its = data_name_.begin(); its != data_name_.end(); its++) {
         // write down the data if previously setted
         if(data_.find(*its)!=data_.end()) {
@@ -68,7 +68,7 @@ void Server::refresh(double time) {
 
 
 /** Store info in a buffer for future output in refresh
- * 
+ *
  * Data are stored in pairs : (legend, val). Sending a val with the same
  * legend key will overidde the previous sent value.
  * The buffer is cleared after each refresh.
@@ -87,9 +87,9 @@ void Server::send(std::string legend, double val) {
  */
 void Server::introduce(std::vector<std::string> measure_name) {
     using namespace std;
-    
+
     vector<string>::iterator it;
-    
+
     for (it = measure_name.begin(); it != measure_name.end(); it++) {
         data_name_.push_back(*it);
     }
