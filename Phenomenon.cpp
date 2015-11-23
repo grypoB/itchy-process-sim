@@ -1,15 +1,12 @@
-/*
- * Phenomenon.cpp
- *
- *  Created on: Nov 2, 2015
- *      Author:
- */
-
 #include "Phenomenon.h"
 #include <cstddef>
 
+/** Default constructor, should not be called explicitly */
 Phenomenon::Phenomenon() : Agent(), pState_(NULL) {}
 
+/**
+ * @param pState state to influence
+ */
 Phenomenon::Phenomenon(State* pState) : Agent(), pState_(pState) {}
 
 Phenomenon::~Phenomenon() {}

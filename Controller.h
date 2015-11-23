@@ -1,16 +1,8 @@
-/*
- * Controller.h
- *
- *  Created on: Nov 2, 2015
- *      Author:
- */
-
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
 #include "State.h"
 #include "Server.h"
-#include "Agent.h"
 
 class Controller: public Agent {
     public:
@@ -22,8 +14,8 @@ class Controller: public Agent {
         virtual void init();
 
     private:
-        State*  pState_;
-        Server* pServer_;
+        State*  pState_; ///< State to control
+        Server* pServer_; ///< Server to send data too
 };
 
-#endif /* CONTROLLER_H_ */
+#endif

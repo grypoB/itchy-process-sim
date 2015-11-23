@@ -12,7 +12,7 @@ class Simulator {
         void run(unsigned int nbTicks, double lenghtTick);
 
     private:
-        std::vector<Agent*> pAgents_; // Agent the simulator has to run
+        std::vector<Agent*> pAgents_; ///< Agents the simulator has to run
 };
 
 #endif

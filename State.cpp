@@ -9,8 +9,7 @@ namespace {
 
 // --------------------------------------------------------------------------
 // Constructors / Destructors
-/** Default constructor, should not be called explicitly
- */
+/** Default constructor, should not be called explicitly */
 State::State()
             : Agent(),  i_phen_(I_MAX), i_ctrl_(I_MAX), val_phen_(DEFAULT),
               val_ctrl_(DEFAULT), val_state_(DEFAULT), prevTime_(DEFAULT) {}
@@ -18,11 +17,11 @@ State::State()
 /** Construct a ready to use state
  *  @param i_phen, i_ctrl influence factor of respectively phenomenon and
  *         controller that might affect it
- *  @param val_state initial value of the state (at t=0)
+ *  @param init_state_val initial value of the state (at t=0)
  */
-State::State(double i_phen, double i_ctrl, double val_state)
-            : Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl),
-              val_phen_(DEFAULT), val_ctrl_(DEFAULT), val_state_(val_state),
+State::State(double i_phen, double i_ctrl, double init_state_val)
+            : Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT),
+              val_ctrl_(DEFAULT), val_state_(init_state_val),
               prevTime_(DEFAULT) {
         
     assert(i_phen>=I_MIN);
@@ -37,6 +36,10 @@ State::~State() {}
 
 // --------------------------------------------------------------------------
 // Redefenition of Agent
+/** Update state according to val setted by controller/phenomenon
+ * @see State::set_val_phen
+ * @see State::set_val_ctrl
+ */
 void State::refresh (double time) {
     double dt(time-prevTime_);
 

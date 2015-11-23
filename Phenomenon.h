@@ -1,10 +1,3 @@
-/*
- * Phenomenon.h
- *
- *  Created on: Nov 2, 2015
- *      Author:
- */
-
 #ifndef PHENOMENON_H_
 #define PHENOMENON_H_
 
@@ -12,18 +5,17 @@
 
 class Phenomenon: public Agent{
     public:
-
         Phenomenon();
-        Phenomenon(State* pState);
+        Phenomenon(State* pState); ///< Initialize a phenomenon influencing a state
         virtual ~Phenomenon();
 
-        virtual void refresh(double time);
+        virtual void refresh(double time); ///< Apply phenomenon value to state
 
     private:
-        State* const pState_;
+        State* const pState_; ///< state to influence
 
     protected:
-        virtual double gen_val_phen(double time)=0;
+        virtual double gen_val_phen(double time)=0; ///< Phenomenon value in function of time
 };
 
-#endif /* PHENOMENON_H_ */
+#endif

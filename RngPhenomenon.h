@@ -7,11 +7,10 @@ class RngPhenomenon: public Phenomenon {
     public:
         RngPhenomenon();
         RngPhenomenon(State* pState, double min, double max);
-
         virtual ~RngPhenomenon();
     private:
-        double min_;
-        double max_;
+        double min_; ///< minimum of phenomenon value
+        double max_; ///< maximium of phenomenon value
     protected:
         virtual double gen_val_phen(double time);
 };

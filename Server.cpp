@@ -6,9 +6,7 @@ namespace {
     const std::string DEFAULT_NAME("JARVIS.txt");
 }
 
-// --------------------------------------------------------------------------
-// Constructors / Destructors
-
+// Default server
 Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
                    std::ios::app), data_name_(0,""), data_() {
     using namespace std;
@@ -19,6 +17,7 @@ Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
     }
 }
 
+// Server with specified filename
 Server::Server(std::string filename) : Agent(), fName_(filename),
                                        file_(fName_.c_str(), std::ios::app),
                                        data_name_(0,"") {
@@ -36,11 +35,10 @@ Server::~Server() {
     }
 }
 
-// --------------------------------------------------------------------------
-// Redefenition of Agent
 
-/**
- * @send the data to the file
+/** Output recorded data to cout and file 
+ *
+ * The file will be formated correctly for gnuplot to parse
  * @see Server::introduce()
  * @see Server::send
  */
@@ -69,19 +67,23 @@ void Server::refresh(double time) {
 }
 
 
-// --------------------------------------------------------------------------
-// Setters
-
-/**
- * @stock momentarily the data in the containers
+/** Store info in a buffer for future output in refresh
+ * 
+ * Data are stored in pairs : (legend, val). Sending a val with the same
+ * legend key will overidde the previous sent value.
+ * The buffer is cleared after each refresh.
+ * @see Server::refresh
  */
 void Server::send(std::string legend, double val) {
     data_[legend] = val;
 }
 
 
-/**
- * @initialise the name of the collected data
+/** Initialize order and legend key of the data to output in refresh
+ * @param measure_name Vector containing the legend key which will be outputed.
+ *                     The order they are in the vector is the order they will
+ *                     be outputed.
+ * @see Server::send
  */
 void Server::introduce(std::vector<std::string> measure_name) {
     using namespace std;
@@ -92,5 +94,5 @@ void Server::introduce(std::vector<std::string> measure_name) {
         data_name_.push_back(*it);
     }
 
-    // TODO Add the content of data_name_ as commentar in files
+    // TODO Add the content of data_name_ as commentary in files
 }
