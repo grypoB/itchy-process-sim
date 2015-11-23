@@ -7,7 +7,7 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wshadow -Weffc++ -Wredundant-decls -Winit-self -Wswitch-default \
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11
-CPPFILES = Controller.cpp Phenomenon.cpp RngPhenomenon.cpp Server.cpp Simulator.cpp State.cpp main.cpp random.cpp
+CPPFILES = src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -35,13 +35,14 @@ clean:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-Controller.o: Controller.cpp Controller.h State.h Agent.h Server.h
-Phenomenon.o: Phenomenon.cpp Phenomenon.h State.h Agent.h
-RngPhenomenon.o: RngPhenomenon.cpp RngPhenomenon.h Phenomenon.h State.h \
-  Agent.h random.h
-Server.o: Server.cpp Server.h Agent.h
-Simulator.o: Simulator.cpp Simulator.h Agent.h
-State.o: State.cpp State.h Agent.h
-main.o: main.cpp Simulator.h Agent.h Controller.h State.h Server.h \
-  RngPhenomenon.h Phenomenon.h
-random.o: random.cpp random.h
+Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
+  src/Server.h
+Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h
+RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
+  src/Phenomenon.h src/State.h src/Agent.h src/random.h
+Server.o: src/Server.cpp src/Server.h src/Agent.h
+Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
+State.o: src/State.cpp src/State.h src/Agent.h
+main.o: src/main.cpp src/Simulator.h src/Agent.h src/Controller.h \
+  src/State.h src/Server.h src/RngPhenomenon.h src/Phenomenon.h
+random.o: src/random.cpp src/random.h
