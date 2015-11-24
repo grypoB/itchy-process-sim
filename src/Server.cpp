@@ -21,7 +21,7 @@ Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
 
 // Server with specified filename
 Server::Server(std::string filename) : Agent(), fName_(filename),
-                                       file_(fName_.c_str(), std::ios::app),
+                                       file_(fName_.c_str(), std::ios::trunc),
                                        data_name_(0,""), data_() {
     using namespace std;
 
@@ -56,13 +56,18 @@ void Server::init() {
         for (unsigned int i=0; i<data_name_.size() ; i++) {
             file_ << data_name_.at(i) << " ";
 
-            if (i==0 && data_name_.size()>1) {
+            if (i==0) { // i==0 represent data_name_=time
                 conf << "plot";
             } else {
-                conf << "\\ \"" << endl << fName_ << "\" using 1:" << i+1 << " title " << data_name_.at(i) << "\\" << endl;
+                conf << " \""<< fName_ << "\" using 1:" << i+1 << " title \"" << data_name_.at(i) << "\"";
+                if (i+1<data_name_.size()) { // if not last value to plot
+                    conf << ", \\" << endl;
+                }
             }
+            
         }
         file_ << endl;
+        conf << endl;
     }
 
 }
