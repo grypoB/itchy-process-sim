@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 #include "Simulator.h"
 #include "Controller.h"
@@ -21,7 +22,7 @@ int main () {
     cout << "Sim OK" << endl;
 
     cout << endl << "Fasten yout seatbelt" << endl;
-    
+
     sim.addAgent(p);
     sim.addAgent(c);
     sim.addAgent(s);
