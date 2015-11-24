@@ -1,7 +1,6 @@
 #include "Simulator.h"
-#include <cstddef>
 
-Simulator::Simulator() : pAgents_(0,NULL) {}
+Simulator::Simulator() : pAgents_(0) {}
 
 /** Adds agent to refresh durign the simulation
  *  @see Simulator::run
