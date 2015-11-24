@@ -14,6 +14,9 @@ namespace {
         if (!initialized) {
             // initialized list of random number
             std::srand(static_cast<unsigned int>(std::time(NULL)));
+            (void) std::rand(); // call it a first time to help scramble
+                                // the first random value of two
+                                // program execution in sucession
             initialized = true;
         }
 
