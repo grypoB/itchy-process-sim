@@ -32,6 +32,9 @@ int main () {
     cout << "----------------------------------------" << endl << endl;
 
     sim.run(10,1.);
+    
+    cout << "----------------------------------------" << endl;
+    cout << "Hope you enjoyed the simulation" << endl << endl;
 
     return EXIT_SUCCESS;
 }
