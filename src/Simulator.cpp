@@ -15,10 +15,11 @@ void Simulator::addAgent(Agent& agent) {
  *       before starting the simulation calls Agent::init.
  *       The call order is the order they were added
  * @see Simulator::addAgent
+ * @param simDuration ammount of time of the total simulation
  * @param nbTicks Number of simulation ticks to do
- * @param lenghtTick Lenght of each tick
  */
-void Simulator::run(unsigned int nbTicks, double lenghtTick) {
+void Simulator::run(double simDuration, unsigned int nbTicks) {
+	double lenghtTick(simDuration/nbTicks);
     double time(lenghtTick); // begin at t=lenghtTick>0
 
     for (unsigned int i=0 ; i<pAgents_.size() ; i++) {

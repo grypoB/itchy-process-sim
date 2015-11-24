@@ -9,7 +9,7 @@ class Simulator {
         Simulator();
 
         void addAgent(Agent& agent);
-        void run(unsigned int nbTicks, double lenghtTick);
+        void run(double simDuration, unsigned int nbTicks);
 
     private:
         std::vector<Agent*> pAgents_; ///< Agents the simulator has to run

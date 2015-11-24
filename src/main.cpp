@@ -10,11 +10,11 @@ int main () {
 
     std::cout << "Initialization..." << std::endl;
 
-    Server server("tata.dat");
+    Server server("tatf.dat");
     cout << "Server OK" << endl;
-    State s(1,1,0);
+    State s(0.0001,.0,0);
     cout << "State OK" << endl;
-    RngPhenomenon p(&s, -1, 100);
+    RngPhenomenon p(&s, 900, 1000);
     cout << "Phenomenon OK" << endl;
     Controller c(&s, &server);
     cout << "Controller OK" << endl;
@@ -31,7 +31,7 @@ int main () {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(10,1.);
+    sim.run(24*60*60,10);
 
     return EXIT_SUCCESS;
 }
