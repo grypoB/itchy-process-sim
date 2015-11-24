@@ -4,6 +4,8 @@
 
 namespace {
     const std::string DEFAULT_NAME("JARVIS.txt");
+    const std::string DEFAULT_GNUPLOT_CONF("gnuplot.conf");
+    const std::string TIME("t");
 }
 
 // Default server
@@ -36,6 +38,35 @@ Server::~Server() {
 }
 
 
+/** Add header to output file
+ * and create corresponding config file for gnuplot
+ *
+ * Needs to be called after Server::introduce
+ */
+void Server::init() {
+    using namespace std;
+
+    ofstream conf(DEFAULT_GNUPLOT_CONF.c_str(), std::ios::trunc); // replace before conf
+
+    if (conf.is_open() && file_.is_open()) {
+        // create commentary at the beginning of the output file
+        // and creat conf file
+        file_ << "# ";
+        data_name_.insert(data_name_.begin(), TIME);
+        for (unsigned int i=0; i<data_name_.size() ; i++) {
+            file_ << data_name_.at(i) << " ";
+
+            if (i==0 && data_name_.size()>1) {
+                conf << "plot";
+            } else {
+                conf << "\\ \"" << endl << fName_ << "\" using 1:" << i+1 << " title " << data_name_.at(i) << "\\" << endl;
+            }
+        }
+        file_ << endl;
+    }
+
+}
+
 /** Output recorded data to cout and file 
  *
  * The file will be formated correctly for gnuplot to parse
@@ -46,6 +77,7 @@ void Server::refresh(double time) {
     using namespace std;
 
     vector<string>::iterator its;
+    data_[TIME] = time;
 
     cout << "t=" << time << "  Server output" << endl;
     

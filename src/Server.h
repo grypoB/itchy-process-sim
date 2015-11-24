@@ -16,6 +16,7 @@ class Server: public Agent {
         ~Server();
 
         virtual void refresh(double time);
+        virtual void init();
 
         void send(std::string legend, double val);
         void introduce(std::vector<std::string> mesure_name);
