@@ -8,7 +8,7 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11 -Weffc++
 SOURCE_DIR = src/
-CPPFILES = src/SaturationController.cpp src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
+CPPFILES = src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
