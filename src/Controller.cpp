@@ -31,7 +31,7 @@ void Controller::refresh (double time) {
     double val_phen(.0);
     double val_ctrl(.0);
 
-    if (pState_!=NULL && pServer_!=NULL) { 
+    if (pState_!=NULL && pServer_!=NULL) {
         
         val_phen  = pState_->get_val_phen() ;
         val_state = pState_->get_val_state();
@@ -59,11 +59,11 @@ void Controller::init() {
 
 
 /** Associate a name with values, when sent to server
- *  
+ *
  *  All legend_keys (aka name) should be different
  *  A "" is equivalent to the value nt being sent to server
- *  @param legendState name to give to the state 
- *  @param legendPhen name to give to the phenomenon 
+ *  @param legendState name to give to the state
+ *  @param legendPhen name to give to the phenomenon
  *  @param legendCtrl name to give to the controller
  *
  *  An exemple usage would be :
@@ -77,7 +77,10 @@ void Controller::set_legend_keys(std::string legendState,
         legend_keys_.at(CTRL) = legendCtrl;
 }
 
-double Controller::getResponse(double, double valState, double) {
+/** Follow the value of the state
+ * There are unused parameters, because it just need the value of the state
+ */
+double Controller::getResponse(double, double val_state, double) {
     return valState;
 }
 
