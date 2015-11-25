@@ -10,7 +10,7 @@ class OnOffController: public Controller {
         virtual ~OnOffController();
 
     protected:
-        double getResponse(double, double val_state, double);
+        virtual double getResponse(double, double val_state, double);
     
     private:
         double val_sat_; ///< value max before controller turns on

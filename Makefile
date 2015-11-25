@@ -43,15 +43,16 @@ vanish:
 GainController.o: src/GainController.cpp src/GainController.h \
  src/Controller.h src/State.h src/Agent.h src/Server.h
 OnOffController.o: src/OnOffController.cpp src/OnOffController.h \
- src/Controller.h src/State.h src/Agent.h src/Server.h
+  src/Controller.h src/State.h src/Agent.h src/Server.h
 Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
- src/Server.h
+  src/Server.h
 Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h
 RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
- src/Phenomenon.h src/State.h src/Agent.h src/random.h
+  src/Phenomenon.h src/State.h src/Agent.h src/random.h
 Server.o: src/Server.cpp src/Server.h src/Agent.h
 Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
 State.o: src/State.cpp src/State.h src/Agent.h
-main.o: src/main.cpp src/Simulator.h src/Agent.h src/Controller.h \
- src/State.h src/Server.h src/RngPhenomenon.h src/Phenomenon.h
+main.o: src/main.cpp src/Simulator.h src/Agent.h src/OnOffController.h \
+  src/Controller.h src/State.h src/Server.h src/RngPhenomenon.h \
+  src/Phenomenon.h
 random.o: src/random.cpp src/random.h
