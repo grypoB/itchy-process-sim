@@ -7,7 +7,7 @@ namespace {
 /** Default constructor, should not be called explicitly */
 OnOffController::OnOffController() : Controller(), val_sat_(DEFAULT_VAL_SAT) {}
 
-/** Create an acif controller with predefined relationship
+/** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to
  * @param val_sat the highest value the controler can have

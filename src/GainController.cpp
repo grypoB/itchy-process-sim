@@ -8,7 +8,7 @@ namespace {
 /** Default constructor, should not be called explicitly */
 GainController::GainController() : Controller(), val_ref_(DEFAULT_VAL_REF), gain_(DEFAULT_GAIN) {}
 
-/** Create an acif controller with predefined relationship
+/** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to
  * @param val_ref value Controller wants to approach

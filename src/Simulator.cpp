@@ -2,7 +2,7 @@
 
 Simulator::Simulator() : pAgents_(0) {}
 
-/** Adds agent to refresh durign the simulation
+/** Adds agent to refresh during the simulation
  *  @see Simulator::run
  */
 void Simulator::addAgent(Agent& agent) {
