@@ -29,6 +29,7 @@ Controller::~Controller() {}
 void Controller::refresh (double time) {
     double val_state(.0);
     double val_phen(.0);
+    double val_ctrl(.0);
 
     if (pState_!=NULL && pServer_!=NULL) { 
         
@@ -36,7 +37,7 @@ void Controller::refresh (double time) {
         val_state = pState_->get_val_state();
         val_ctrl = getResponse(time, val_state, val_phen);
         // react to state and phen value
-        pState->set_val_ctrl(val_ctrl);
+        pState_->set_val_ctrl(val_ctrl);
 
         // log to the server
         pServer_->send(legend_keys_[PHENOMENON], val_phen);
@@ -49,19 +50,9 @@ void Controller::refresh (double time) {
 
 
 /** Initialize controller/server communication
- * If not called before refresh, server won't know what to print
  */
 void Controller::init() {
-    using namespace std;
-    
-
     if(pServer_!= 0) {
-        if(legend_keys_.size() == 0) {
-            legend_keys_.push_back("phenomenon");
-            legend_keys_.push_back("state");
-            legend_keys_.push_back("controller");
-        }
-        
         pServer_->introduce(legend_keys_);
     }
 }
