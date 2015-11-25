@@ -81,6 +81,6 @@ void Controller::set_legend_keys(std::string legendState,
  * There are unused parameters, because it just need the value of the state
  */
 double Controller::getResponse(double, double val_state, double) {
-    return valState;
+    return val_state;
 }
 
