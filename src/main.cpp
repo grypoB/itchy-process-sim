@@ -10,11 +10,11 @@ int main () {
 
     std::cout << "Initialization..." << std::endl;
 
-    Server server("tatf.dat");
+    Server server("log.dat");
     cout << "Server OK" << endl;
     State s(0.001,.01,20);
     cout << "State OK" << endl;
-    RngPhenomenon p(&s, 10, 30);
+    RngPhenomenon p(&s, 7, 25);
     cout << "Phenomenon OK" << endl;
     OnOffController c(&s, &server, 15);
     c.set_legend_keys("room temperature",
@@ -38,7 +38,7 @@ int main () {
     
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
-    cout << "Run >> gnuplot gnuplot.conf -p << to see the graph of the simulation" << endl;
+    cout << "Run >> gnuplot -persist gnuplot.conf << to see the graph of the simulation" << endl;
 
     return EXIT_SUCCESS;
 }
