@@ -20,6 +20,11 @@ OnOffController::OnOffController(State* pState, Server* pServer, double val_sat)
 
 OnOffController::~OnOffController() {}
 
+
+/** Turn on when val_state is over a certain value
+ * There are unused parameters, because it just need
+ * the value of the state
+ */
 double OnOffController::getResponse(double, double val_state, double) {
     
     if (val_state > val_sat_) {

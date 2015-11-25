@@ -28,7 +28,7 @@ class Controller: public Agent {
         /** retrun how the controller respond, should be reimplement in child
          * classes
          */
-        virtual double getResponse(double time, double valState, double valPhen);
+        virtual double getResponse(double time, double val_state, double val_phen);
 
 };
 

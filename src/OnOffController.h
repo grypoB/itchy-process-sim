@@ -3,7 +3,7 @@
 
 #include "Controller.h"
 
-class OnOffController: protected Controller {
+class OnOffController: public Controller {
     public:
         OnOffController();
         OnOffController(State* pState, Server* pServer, double val_sat);
