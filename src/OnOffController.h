@@ -3,14 +3,14 @@
 
 #include "Controller.h"
 
-class OnOffController: protected Controller {
+class OnOffController: public Controller {
     public:
         OnOffController();
         OnOffController(State* pState, Server* pServer, double val_sat);
         virtual ~OnOffController();
 
     protected:
-        double getResponse(double, double val_state, double);
+        virtual double getResponse(double, double val_state, double);
     
     private:
         double val_sat_;

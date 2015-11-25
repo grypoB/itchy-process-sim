@@ -128,7 +128,9 @@ void Server::introduce(std::vector<std::string> measure_name) {
     vector<string>::iterator it;
 
     for (it = measure_name.begin(); it != measure_name.end(); it++) {
-        data_name_.push_back(*it);
+        if (it->compare("") != 0) { // check if non-empty
+            data_name_.push_back(*it);
+        }
     }
 
 }

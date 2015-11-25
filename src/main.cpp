@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #include "Simulator.h"
-#include "Controller.h"
+#include "OnOffController.h"
 #include "RngPhenomenon.h"
 
 int main () {
@@ -12,12 +12,14 @@ int main () {
 
     Server server("tatf.dat");
     cout << "Server OK" << endl;
-    State s(0.0001,.0,0);
+    State s(0.001,.01,20);
     cout << "State OK" << endl;
-    RngPhenomenon p(&s, 900, 1000);
+    RngPhenomenon p(&s, 10, 30);
     cout << "Phenomenon OK" << endl;
-    Controller c(&s, &server);
-    c.set_legend_keys("temp", "random","fsdf");
+    OnOffController c(&s, &server, 15);
+    c.set_legend_keys("room temperature",
+                       "outside temperature",
+                       "cooler");
     cout << "Controller OK" << endl;
     Simulator sim;
     cout << "Sim OK" << endl;
@@ -32,7 +34,7 @@ int main () {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(24*60*60,10);
+    sim.run(60*60,100);
     
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
