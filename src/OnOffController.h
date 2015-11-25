@@ -13,7 +13,7 @@ class OnOffController: public Controller {
         double getResponse(double, double val_state, double);
     
     private:
-        double val_sat_;
+        double val_sat_; ///< value max before controller turns on
 };
 
 #endif
