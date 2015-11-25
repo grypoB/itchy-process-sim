@@ -2,8 +2,14 @@
 
 #include "Controller.h"
 
+namespace {
+    enum Agent {PHENOMENON = 0, STATE, CTRL};
+    const unsigned int NB_AGENT = 3;
+}
+
 /** Default constructor, should not be called explicitly */
-Controller::Controller() : Agent(), pState_(NULL), pServer_(NULL) {}
+Controller::Controller() : Agent(), pState_(0), pServer_(0),
+                           legend_keys_(NB_AGENT, "") {}
 
 /** Create a passif controller with predefined relationship
  * @param pState the state to monitor
@@ -13,40 +19,65 @@ Controller::Controller() : Agent(), pState_(NULL), pServer_(NULL) {}
  * @see Controller::refresh
  */
 Controller::Controller(State* pState, Server* pServer)
-    : Agent(), pState_(pState), pServer_(pServer) {}
+    : Agent(), pState_(pState), pServer_(pServer),
+      legend_keys_(NB_AGENT, "") {}
 
 Controller::~Controller() {}
 
-/** Monitor the state and send data to server
+/** Monitor the state
  */
-void Controller::refresh (double) {
-    double val_phen (.0);
+void Controller::refresh (double time) {
     double val_state(.0);
-  
-    assert(pState_!=NULL && pServer_!=NULL);
+    double val_phen(.0);
+    double val_ctrl(.0);
 
-    val_phen  = pState_->get_val_phen() ;
-    val_state = pState_->get_val_state();
+    if (pState_!=NULL && pServer_!=NULL) { 
+        
+        val_phen  = pState_->get_val_phen() ;
+        val_state = pState_->get_val_state();
+        val_ctrl = getResponse(time, val_state, val_phen);
+        // react to state and phen value
+        pState_->set_val_ctrl(val_ctrl);
+
+        // log to the server
+        pServer_->send(legend_keys_[PHENOMENON], val_phen);
+        pServer_->send(legend_keys_[STATE], val_state);
+        pServer_->send(legend_keys_[CTRL], val_ctrl);
+    }
+
     
-    pState_->set_val_ctrl(val_state); // so ctrl has no effect
-    
-    // TODO check server format output
-    pServer_->send("phenomenon", val_phen );
-    pServer_->send("state",      val_state);
 }
 
 
 /** Initialize controller/server communication
- * If not called before refresh, server won't know what to print
  */
 void Controller::init() {
-    using namespace std;
-    vector<string> legendKeys(0,"");
-
-    if(pServer_!=NULL) {
-        legendKeys.push_back("phenomenon");
-        legendKeys.push_back("state");
-
-        pServer_->introduce(legendKeys);
+    if(pServer_!= 0) {
+        pServer_->introduce(legend_keys_);
     }
 }
+
+
+/** Associate a name with values, when sent to server
+ *  
+ *  All legend_keys (aka name) should be different
+ *  A "" is equivalent to the value nt being sent to server
+ *  @param legendState name to give to the state 
+ *  @param legendPhen name to give to the phenomenon 
+ *  @param legendCtrl name to give to the controller
+ *
+ *  An exemple usage would be :
+ *  set_legend_keys("room temparature", "outside temparature", "heater")
+ */
+void Controller::set_legend_keys(std::string legendState,
+                                 std::string legendPhen,
+                                 std::string legendCtrl) {
+        legend_keys_.at(PHENOMENON) = legendPhen;
+        legend_keys_.at(STATE) = legendState;
+        legend_keys_.at(CTRL) = legendCtrl;
+}
+
+double Controller::getResponse(double, double valState, double) {
+    return valState;
+}
+

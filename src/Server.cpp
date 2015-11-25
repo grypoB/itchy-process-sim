@@ -89,12 +89,12 @@ void Server::refresh(double time) {
     for (its = data_name_.begin(); its != data_name_.end(); its++) {
         // write down the data if previously setted
         if(data_.find(*its)!=data_.end()) {
-		    file_ << data_[*its] << " "; // TODO use iomanip
+		    file_ << data_[*its] << " ";
 		    cout << *its << " "  << data_[*its] << endl;
 		}
 		else {
             file_ << "- ";
-            cout << "- ";
+            cout << *its << "- " << endl;
         }
     }
     file_ << endl;
@@ -131,5 +131,4 @@ void Server::introduce(std::vector<std::string> measure_name) {
         data_name_.push_back(*it);
     }
 
-    // TODO Add the content of data_name_ as commentary in files
 }

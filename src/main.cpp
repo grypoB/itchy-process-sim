@@ -17,6 +17,7 @@ int main () {
     RngPhenomenon p(&s, 900, 1000);
     cout << "Phenomenon OK" << endl;
     Controller c(&s, &server);
+    c.set_legend_keys("temp", "random","fsdf");
     cout << "Controller OK" << endl;
     Simulator sim;
     cout << "Sim OK" << endl;

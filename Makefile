@@ -8,7 +8,7 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11 -Weffc++
 SOURCE_DIR = src/
-CPPFILES = src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
+CPPFILES = src/OnOffController.cpp src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -36,9 +36,8 @@ clean:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-SaturationController.o: src/SaturationController.cpp \
- src/SaturationController.h src/Controller.h src/State.h src/Agent.h \
- src/Server.h
+OnOffController.o: src/OnOffController.cpp src/OnOffController.h \
+ src/Controller.h src/State.h src/Agent.h src/Server.h
 Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
  src/Server.h
 Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h
