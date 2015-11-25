@@ -8,7 +8,8 @@ namespace {
 }
 
 /** Default constructor, should not be called explicitly */
-Controller::Controller() : Agent(), pState_(0), pServer_(0) {}
+Controller::Controller() : Agent(), pState_(0), pServer_(0),
+                           legend_keys_(NB_AGENT, "") {}
 
 /** Create a passif controller with predefined relationship
  * @param pState the state to monitor
@@ -18,19 +19,32 @@ Controller::Controller() : Agent(), pState_(0), pServer_(0) {}
  * @see Controller::refresh
  */
 Controller::Controller(State* pState, Server* pServer)
-    : Agent(), pState_(pState), pServer_(pServer) {}
+    : Agent(), pState_(pState), pServer_(pServer),
+      legend_keys_(NB_AGENT, "") {}
 
 Controller::~Controller() {}
 
 /** Monitor the state
  */
-void Controller::refresh (double) {
-    double val_state;
+void Controller::refresh (double time) {
+    double val_state(.0);
+    double val_phen(.0);
+
+    if (pState_!=NULL && pServer_!=NULL) { 
+        
+        val_phen  = pState_->get_val_phen() ;
+        val_state = pState_->get_val_state();
+        val_ctrl = getResponse(time, val_state, val_phen);
+        // react to state and phen value
+        pState->set_val_ctrl(val_ctrl);
+
+        // log to the server
+        pServer_->send(legend_keys_[PHENOMENON], val_phen);
+        pServer_->send(legend_keys_[STATE], val_state);
+        pServer_->send(legend_keys_[CTRL], val_ctrl);
+    }
+
     
-    val_state = get_info_state();
-    pState_->set_val_ctrl(val_state); // so ctrl has no effect
-    
-    transmit();
 }
 
 
@@ -53,57 +67,26 @@ void Controller::init() {
 }
 
 
-/** Initialize name of the agents of the simulation
- * If not called before init or with incorrect number of arguments (3),
- * default name will be given
+/** Associate a name with values, when sent to server
+ *  
+ *  All legend_keys (aka name) should be different
+ *  A "" is equivalent to the value nt being sent to server
+ *  @param legendState name to give to the state 
+ *  @param legendPhen name to give to the phenomenon 
+ *  @param legendCtrl name to give to the controller
  *
- * @param legend Vector containing the legend key which will be outputed.
- *               The order they are in the vector is the following order:
- *               phenomenon, state, controller
+ *  An exemple usage would be :
+ *  set_legend_keys("room temparature", "outside temparature", "heater")
  */
-void Controller::set_legend(std::vector<std::string> legend) {
-    using namespace std;
-    
-    if(legend_keys_.size() != NB_AGENT) {
-        legend_keys_.push_back("phenomenon");
-        legend_keys_.push_back("state");
-        legend_keys_.push_back("controller");
-    }
-            
-    else {
-        legend_keys_.push_back(legend[PHENOMENON]);
-        legend_keys_.push_back(legend[STATE]);
-        legend_keys_.push_back(legend[CTRL]);
-    }
+void Controller::set_legend_keys(std::string legendState,
+                                 std::string legendPhen,
+                                 std::string legendCtrl) {
+        legend_keys_.at(PHENOMENON) = legendPhen;
+        legend_keys_.at(STATE) = legendState;
+        legend_keys_.at(CTRL) = legendCtrl;
 }
 
-/** Return the current value of the state
- */
-double Controller::get_info_state() {
-    
-    assert(pState_!=0);
-    return pState_->get_val_state();
+double Controller::getResponse(double, double valState, double) {
+    return valState;
 }
 
-/** Send to Server the values that won't be changed
- */
-void Controller::transmit() {
-    double val_phen (.0);
-    double val_state(.0);
-    
-    assert(pState_!=0 && pServer_!=0);
-
-    val_phen  = pState_->get_val_phen() ;
-    val_state = pState_->get_val_state();
-    
-    pServer_->send(legend_keys_[PHENOMENON], val_phen );
-    pServer_->send(legend_keys_[STATE], val_state);
-}
-
-/** Send the value of the controller to Server
- */
-void Controller::send_val_ctrl_to_server(double val_ctrl) {
-    assert(pServer_!=0);
-    
-    pServer_->send(legend_keys_[CTRL], val_ctrl);
-}
