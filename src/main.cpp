@@ -3,23 +3,23 @@
 
 #include "Simulator.h"
 #include "OnOffController.h"
-#include "RngPhenomenon.h"
+#include "SinPhenomenon.h"
 
 int main () {
     using namespace std;
 
     std::cout << "Initialization..." << std::endl;
 
-    Server server("log.dat");
+    Server server("log.csv");
     cout << "Server OK" << endl;
-    State s(0.001,.01,20);
+    State s(0.001,0,20);
     cout << "State OK" << endl;
-    RngPhenomenon p(&s, 7, 25);
+    SinPhenomenon p(&s, 100, 20, -10,-10);
+    p.set_standard_deviation(1);
     cout << "Phenomenon OK" << endl;
-    OnOffController c(&s, &server, 15);
+    OnOffController c(&s, &server, 50);
     c.set_legend_keys("room temperature",
-                       "outside temperature",
-                       "cooler");
+                       "outside temperature");
     cout << "Controller OK" << endl;
     Simulator sim;
     cout << "Sim OK" << endl;
@@ -34,7 +34,7 @@ int main () {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(60*60,100);
+    sim.run(200,100);
     
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
