@@ -1,9 +1,11 @@
 #include <ctime>
 #include <cstdlib>
+#include <cmath>
 
 #include "random.h"
 
 namespace {
+    const double PI(3.14159265358979323846); // pi
     /**
      * @return random number in range (0,1]
      * More precisely [~4.656612877e-10, 1]
@@ -31,5 +33,15 @@ namespace Rand {
      */
     double rand(double min, double max) {
         return min + randDouble()*(max-min);
+    }
+
+    /** Return a number which would fall into the given normal distribution
+     *  It uses the Box-Muller trasnform
+     *  @param mean mean of the normal distribution
+     *  @param sigma standard deviation of the normal distribution
+     */
+    double normal_dist(double mean, double sigma) {
+        double y(sqrt(-2*log(randDouble()))*cos(2*PI*randDouble()));
+        return mean + sigma*y;
     }
 } /* namespsace Rand */
