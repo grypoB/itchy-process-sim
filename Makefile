@@ -6,11 +6,9 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion \
 -Wshadow -Wredundant-decls -Winit-self -Wswitch-default \
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
-# -std=c++11 -Weffc++
+# -std=c++11 -Weffc++ 
 SOURCE_DIR = src/
-CPPFILES = src/GainController.cpp src/OnOffController.cpp src/Controller.cpp \
-           src/Phenomenon.cpp src/RngPhenomenon.cpp src/SinPhenomenon.cpp    \
-		   src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
+CPPFILES = src/SinPhenomenon.cpp src/PulsePhenomenon.cpp src/LowHighController.cpp src/GainController.cpp src/OnOffController.cpp src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -42,22 +40,26 @@ vanish:
 # -- Regles de dependances generees automatiquement
 #
 # DO NOT DELETE THIS LINE
-GainController.o: src/GainController.cpp src/GainController.h \
-  src/Controller.h src/State.h src/Agent.h src/Server.h
-OnOffController.o: src/OnOffController.cpp src/OnOffController.h \
-  src/Controller.h src/State.h src/Agent.h src/Server.h
-Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
-  src/Server.h
-Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h \
-  src/random.h
-RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
-  src/Phenomenon.h src/State.h src/Agent.h src/random.h
 SinPhenomenon.o: src/SinPhenomenon.cpp src/SinPhenomenon.h \
-  src/Phenomenon.h src/State.h src/Agent.h src/random.h
+ src/Phenomenon.h src/State.h src/Agent.h src/random.h
+PulsePhenomenon.o: src/PulsePhenomenon.cpp src/PulsePhenomenon.h \
+ src/Phenomenon.h src/State.h src/Agent.h src/random.h
+LowHighController.o: src/LowHighController.cpp src/LowHighController.h \
+ src/Controller.h src/State.h src/Agent.h src/Server.h
+GainController.o: src/GainController.cpp src/GainController.h \
+ src/Controller.h src/State.h src/Agent.h src/Server.h
+OnOffController.o: src/OnOffController.cpp src/OnOffController.h \
+ src/Controller.h src/State.h src/Agent.h src/Server.h
+Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
+ src/Server.h
+Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h \
+ src/random.h
+RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
+ src/Phenomenon.h src/State.h src/Agent.h src/random.h
 Server.o: src/Server.cpp src/Server.h src/Agent.h
 Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
 State.o: src/State.cpp src/State.h src/Agent.h
 main.o: src/main.cpp src/Simulator.h src/Agent.h src/OnOffController.h \
-  src/Controller.h src/State.h src/Server.h src/RngPhenomenon.h \
-  src/Phenomenon.h
+ src/Controller.h src/State.h src/Server.h src/SinPhenomenon.h \
+ src/Phenomenon.h
 random.o: src/random.cpp src/random.h
