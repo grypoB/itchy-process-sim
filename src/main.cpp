@@ -14,7 +14,7 @@ int main () {
     cout << "Server OK" << endl;
     State s(0.001,0,20);
     cout << "State OK" << endl;
-    SinPhenomenon p(&s, 100, 20, -10,-10);
+    SinPhenomenon p(&s, 100., 20., -10.,-10., -1000., 1000.);
     p.set_standard_deviation(1);
     cout << "Phenomenon OK" << endl;
     OnOffController c(&s, &server, 50);
