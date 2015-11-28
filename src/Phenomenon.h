@@ -9,10 +9,12 @@ class Phenomenon: public Agent{
         Phenomenon(State* pState); ///< Initialize a phenomenon influencing a state
         virtual ~Phenomenon();
 
+        void set_standard_deviation(double sigma);
         virtual void refresh(double time); ///< Apply phenomenon value to state
 
     private:
         State* const pState_; ///< state to influence
+        double standard_deviation_;
 
     protected:
         virtual double gen_val_phen(double time)=0; ///< Phenomenon value in function of time
