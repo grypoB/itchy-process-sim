@@ -1,5 +1,4 @@
 #include "PulsePhenomenon.h"
-#include "random.h"
 #include <cassert>
 
 namespace {
@@ -31,12 +30,12 @@ PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high, double 
                                   t_delay_(delay), t_rise_(rise), p_high_(p_width), 
                                   t_fall_(fall), step_(DELAY), rand_min_(rand_min),
                                   rand_max_(rand_max) {
-    assert(t_delay_ < .0);
-    assert(t_rise_  < .0);
-    assert(t_fall_  < .0);
-    assert(p_high_ < .0);
+    assert(t_delay_ >= .0);
+    assert(t_rise_  >= .0);
+    assert(t_fall_  >= .0);
+    assert(p_high_  >= .0);
     p_low_ = period - (t_rise_ + p_high_ + t_fall_);
-    assert(p_low_   < .0);
+    assert(p_low_   >= .0);
 }
 
 PulsePhenomenon::~PulsePhenomenon() {}
@@ -98,7 +97,6 @@ double PulsePhenomenon::gen_val_phen(double time) {
             } break;
         }
     } while (delta_t > NO_TIME_LEFT);
-    val_phen += Rand::rand(rand_min_, rand_max_);
     return val_phen;
 }
 
