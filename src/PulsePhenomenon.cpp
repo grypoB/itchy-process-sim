@@ -21,7 +21,7 @@ PulsePhenomenon::PulsePhenomenon()
                               t_fall_(DEFAULT_FALL), p_low_(DEFAULT_WIDTH), step_(DELAY),
                               rand_min_(DEFAULT_RANDOM), rand_max_(DEFAULT_RANDOM) {}
 
-/** Initialize a phenomenon wich create a pulsed curve and add random values in range (min,max]
+/** Initialize a phenomenon wich create a pulsed response
  */
 PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high, double delay,
                                  double rise, double p_width, double fall, double period, 
@@ -40,7 +40,7 @@ PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high, double 
 
 PulsePhenomenon::~PulsePhenomenon() {}
 
-/** Return a pulsed function whith a random noise
+/** Return a pulsed function
  */
 double PulsePhenomenon::gen_val_phen(double time) {
     double val_phen, delta_t;

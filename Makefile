@@ -30,11 +30,11 @@ depend:
 
 clean:
 	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
-	@/bin/rm -f $(SOURCE_DIR)/*.o *.x
+	@/bin/rm -f $(SOURCE_DIR)/*.o *.x *.cpp~ *.h~ *.gch
 
 vanish:
 	@echo " *** EFFACE MODULES OBJET ***"
-	@/bin/rm -f $(SOURCE_DIR)/*.o
+	@/bin/rm -f $(SOURCE_DIR)/*.o *.cpp~ *.h~ *.gch
 	
 #
 # -- Regles de dependances generees automatiquement
