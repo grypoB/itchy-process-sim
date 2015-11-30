@@ -3,7 +3,7 @@
 
 #include "Simulator.h"
 #include "OnOffController.h"
-#include "SinPhenomenon.h"
+#include "PulsePhenomenon.h"
 
 int main () {
     using namespace std;
@@ -14,8 +14,8 @@ int main () {
     cout << "Server OK" << endl;
     State s(0.001,0,20);
     cout << "State OK" << endl;
-    SinPhenomenon p(&s, 100., 20., -10.,-10., -1000., 1000.);
-    p.set_standard_deviation(1);
+    PulsePhenomenon p(&s, 100., -100, 100, 50, 0, 50, 100);
+    p.set_standard_deviation(10);
     cout << "Phenomenon OK" << endl;
     OnOffController c(&s, &server, 50);
     c.set_legend_keys("room temperature",
@@ -34,7 +34,7 @@ int main () {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(200,100);
+    sim.run(300,1000);
     
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
