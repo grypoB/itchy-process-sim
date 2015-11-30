@@ -6,14 +6,18 @@
 class OnOffController: public Controller {
     public:
         OnOffController();
-        OnOffController(State* pState, Server* pServer, double val_sat);
+        OnOffController(State* pState, Server* pServer, double switch_high, 
+                                     double switch_low, double val_high, double val_low);
         virtual ~OnOffController();
 
     protected:
         virtual double getResponse(double, double val_state, double);
     
     private:
-        double val_sat_; ///< value max before controller turns on
+        double val_switch_high_; ///< value to reach so controller switch to the highest value
+        double val_switch_low_; ///< value to reach so controller switch to the highest value
+        double val_high_; ///< highest value controller can take
+        double val_low_; ///< lowest value controller can take
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #include "Simulator.h"
-#include "OnOffController.h"
+#include "SaturationController.h"
 #include "SinPhenomenon.h"
 
 int main () {
@@ -17,7 +17,7 @@ int main () {
     SinPhenomenon p(&s, 100., 20., -10.,-10., -1000., 1000.);
     p.set_standard_deviation(1);
     cout << "Phenomenon OK" << endl;
-    OnOffController c(&s, &server, 50);
+    SaturationController c(&s, &server, 50);
     c.set_legend_keys("room temperature",
                        "outside temperature");
     cout << "Controller OK" << endl;
