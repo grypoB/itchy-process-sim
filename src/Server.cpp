@@ -52,6 +52,7 @@ void Server::init() {
         // create commentary at the beginning of the output file
         // and creat conf file
         file_ << "# ";
+        file_.precision(15);
         data_name_.insert(data_name_.begin(), TIME);
         for (unsigned int i=0; i<data_name_.size() ; i++) {
             file_ << data_name_.at(i) << " ";
@@ -84,21 +85,21 @@ void Server::refresh(double time) {
     vector<string>::iterator its;
     data_[TIME] = time;
 
-    cout << "t=" << time << "  Server output" << endl;
+    //cout << "t=" << time << "  Server output" << endl;
 
     for (its = data_name_.begin(); its != data_name_.end(); its++) {
         // write down the data if previously setted
         if(data_.find(*its)!=data_.end()) {
-		    file_ << data_[*its] << " ";
-		    cout << *its << " "  << data_[*its] << endl;
+		    file_ << data_[*its] << ", ";
+		    //cout << *its << " "  << data_[*its] << endl;
 		}
 		else {
             file_ << "- ";
-            cout << *its << "- " << endl;
+            //cout << *its << "- " << endl;
         }
     }
     file_ << endl;
-    cout << endl;
+    //cout << endl;
 
     data_.clear();
 }
