@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #include "Simulator.h"
-#include "SaturationController.h"
+#include "OnOffController.h"
 #include "SinPhenomenon.h"
 
 int main () {
@@ -12,14 +12,15 @@ int main () {
 
     Server server("log.csv");
     cout << "Server OK" << endl;
-    State s(0.001,0,20);
+    State s(0.1,0.1,20);
     cout << "State OK" << endl;
-    SinPhenomenon p(&s, 100., 20., -10.,-10., -1000., 1000.);
-    p.set_standard_deviation(1);
+    SinPhenomenon p(&s, 100., 0., 20.,0., -1000., 1000.);
+    //p.set_standard_deviation(1);
     cout << "Phenomenon OK" << endl;
-    SaturationController c(&s, &server, 50);
+    OnOffController c(&s, &server, 0 ,10,20,-20);
     c.set_legend_keys("room temperature",
-                       "outside temperature");
+                       "outside temperature",
+                       "controller");
     cout << "Controller OK" << endl;
     Simulator sim;
     cout << "Sim OK" << endl;
