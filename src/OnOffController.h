@@ -5,19 +5,19 @@
 
 class OnOffController: public Controller {
     public:
-        OnOffController();
-        OnOffController(State* pState, Server* pServer, double switch_high, 
-                                     double switch_low, double val_high, double val_low);
+        OnOffController(State* pState, Server* pServer,
+                        double threshold_low, double threshold_high,
+                        double output_high, double output_low);
         virtual ~OnOffController();
 
     protected:
         virtual double getResponse(double, double val_state, double);
     
     private:
-        double val_switch_high_; ///< value to reach so controller switch to the highest value
-        double val_switch_low_; ///< value to reach so controller switch to the highest value
-        double val_high_; ///< highest value controller can take
-        double val_low_; ///< lowest value controller can take
+        double threshold_low_;  ///< Min acceptable value of the state
+        double threshold_high_; ///< Max acceptable value of the state
+        double output_high_; ///< highest value controller can output
+        double output_low_;  ///< lowest value controller can output
 };
 
 #endif
