@@ -3,26 +3,14 @@
 #include <sstream>
 
 namespace {
-    const std::string DEFAULT_NAME("JARVIS.txt");
-    const std::string DEFAULT_GNUPLOT_CONF("gnuplot.conf");
     const std::string TIME("t");
 }
 
-// Default server
-Server::Server() : Agent(), fName_(DEFAULT_NAME), file_(fName_.c_str(),
-                   std::ios::app), data_name_(0,""), data_() {
-    using namespace std;
-
-    if (file_.fail()) {
-        cout << "Could not open file " << fName_;
-        cout << ". The server won't log in a file." << endl;
-    }
-}
-
 // Server with specified filename
-Server::Server(std::string filename) : Agent(), fName_(filename),
-                                       file_(fName_.c_str(), std::ios::trunc),
-                                       data_name_(0,""), data_() {
+Server::Server(std::string filename, std::string gnuplotConfName)
+               : Agent(), fName_(filename), gnuplotConfName_(gnuplotConfName),
+                 file_(fName_.c_str(), std::ios::trunc),
+                 data_name_(0,""), data_() {
     using namespace std;
 
     if (file_.fail()) {
@@ -46,7 +34,7 @@ Server::~Server() {
 void Server::init() {
     using namespace std;
 
-    ofstream conf(DEFAULT_GNUPLOT_CONF.c_str(), std::ios::trunc); // replace before conf
+    ofstream conf(gnuplotConfName_.c_str(), std::ios::trunc); // replace before conf
 
     if (conf.is_open() && file_.is_open()) {
         // create commentary at the beginning of the output file
@@ -133,5 +121,4 @@ void Server::introduce(std::vector<std::string> measure_name) {
             data_name_.push_back(*it);
         }
     }
-
 }

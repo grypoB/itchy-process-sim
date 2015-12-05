@@ -7,12 +7,19 @@
 #include <fstream>
 #include <map>
 
+/** Constants used by Server constructor
+ */
+namespace ServerConst {
+    const std::string DEFAULT_NAME("JARVIS.txt");
+    const std::string DEFAULT_GNUPLOT_CONF("gnuplot.conf");
+}
+
 class Server: public Agent {
     public:
-        Server(); ///< Create a fonctionning server with default output file
         /** Create a server which will output simulation data in given the 
          * filename*/
-        Server(std::string filename); 
+        Server(std::string filename = ServerConst::DEFAULT_NAME,
+               std::string gnuplotConfName = ServerConst::DEFAULT_GNUPLOT_CONF);
         ~Server();
 
         virtual void refresh(double time);
@@ -23,6 +30,7 @@ class Server: public Agent {
 
     private:
         std::string fName_; ///< name of output file to be used by gnuplot
+        std::string gnuplotConfName_; ///< name of config file to be used by gnuplot
         std::ofstream file_; ///< output stream for writting in fName_
         std::vector<std::string> data_name_; ///< name of th data to output
         std::map<const std::string, double> data_; ///< buffer of sent data
