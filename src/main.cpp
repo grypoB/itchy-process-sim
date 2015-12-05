@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "xml_parser.h"
 #include "Simulator.h"
 #include "OnOffController.h"
 #include "SinPhenomenon.h"
@@ -9,7 +10,8 @@ int main () {
     using namespace std;
 
     std::cout << "Initialization..." << std::endl;
-
+    xml_parser("sim.xml");
+    /*
     Server server("log.csv");
     cout << "Server OK" << endl;
     State s(0.1,0.1,20);
@@ -40,6 +42,7 @@ int main () {
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
     cout << "Run >> gnuplot -persist gnuplot.conf << to see the graph of the simulation" << endl;
+    */
 
     return EXIT_SUCCESS;
 }

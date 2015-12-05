@@ -65,12 +65,12 @@ RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
 Server.o: src/Server.cpp src/Server.h src/Agent.h
 Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
 State.o: src/State.cpp src/State.h src/Agent.h
-main.o: src/main.cpp src/Simulator.h src/Agent.h src/OnOffController.h \
-  src/Controller.h src/State.h src/Server.h src/SinPhenomenon.h \
-  src/Phenomenon.h
+main.o: src/main.cpp src/xml_parser.h src/Simulator.h src/Agent.h \
+  src/OnOffController.h src/Controller.h src/State.h src/Server.h \
+  src/SinPhenomenon.h src/Phenomenon.h
 random.o: src/random.cpp src/random.h
-xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/Simulator.h \
-  src/Agent.h src/tinyxml/tinyxml.h src/xml_utils.h
+xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/tinyxml/tinyxml.h \
+  src/xml_utils.h
 tinystr.o: src/tinyxml/tinystr.cpp src/tinyxml/tinystr.h
 tinyxml.o: src/tinyxml/tinyxml.cpp src/tinyxml/tinyxml.h
 tinyxmlerror.o: src/tinyxml/tinyxmlerror.cpp src/tinyxml/tinyxml.h
