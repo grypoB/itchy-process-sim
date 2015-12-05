@@ -1,0 +1,91 @@
+<!-- 
+     TODO add standard deviation
+     TODO add min and max for all of them
+     ========== Zone format ===================
+
+    <zone>
+        <controller type="">
+        </controller>
+        <phenomenon type="">
+        </phenomenon>
+        <state>
+            <i_phen> </i_phen>
+            <i_ctrl> </i_ctrl>
+            <initial_value> </initial_value>
+        </state>
+    </zone>
+
+     ========== Controller formats ===================
+        <controller type="OnOff">
+            <threshold_low>  </threshold_low>
+            <threshold_high> </threshold_high>
+            <output_high>    </output_high>
+            <output_low>     </output_low> 
+        </controller>
+
+        <controller type="default">
+        </controller>
+
+        <controller type="saturation">
+            <val_sat> </val_sat> 
+        </controller>
+
+        <controller type="gain">
+            <gain> </gain> 
+            <val_ref> </val_ref> 
+        </controller>
+
+     ========== Phenomenon formats ===================
+        <phenomenon type="pulse">
+            <low> </low> 
+            <high> </high> 
+            <p_width> </p_width> 
+            <period> </period> 
+
+            <rise> </rise>   optional
+            <fall> </fall>   optional
+            <delay> </delay> optional
+        </phenomenon>
+
+        <phenomenon type="sin">
+            <amplitude> </amplitude> 
+            <period> </period> 
+
+            <offset> </offset>   optional
+            <phase> </phase>   optional
+        </phenomenon>
+
+        <phenomenon type="random">
+            <min> </min> 
+            <max> </max> 
+        </phenomenon>
+-->
+
+
+
+<sim duration="300" nbTicks="100000">
+    <zone>
+        <controller type="OnOff">
+            <threshold_low>  -10</threshold_low>
+            <threshold_high>10 </threshold_high>
+            <output_high>   100 </output_high>
+            <output_low>    -100 </output_low> 
+            <legend>
+                <ctrl>ctrl</ctrl>
+                <phen>phen </phen>
+                <state>state </state>
+            </legend>
+        </controller>
+        <phenomenon type="sin">
+            <amplitude>100 </amplitude> 
+            <period>100 </period> 
+        </phenomenon>
+        <state>
+            <i_phen>0.5 </i_phen>
+            <i_ctrl>0.5 </i_ctrl>
+            <initial_value>0 </initial_value>
+        </state>
+    </zone>
+
+    <server log="log.dat" conf="gnuplot.conf"> </server>
+</sim>
