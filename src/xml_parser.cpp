@@ -1,10 +1,3 @@
-/*
- * xml_parser.cpp
- *
- *  Created on: 11 juin 2013
- *      Author: vachoux
- */
-
 #include "xml_parser.h"
 #include "tinyxml/tinyxml.h"
 #include "xml_utils.h"
@@ -12,22 +5,14 @@
 using namespace std;
 
 void xml_parser (string xml_file) {
-
 	TiXmlDocument   dom(xml_file);  // DOM
 	TiXmlElement*   p_root;       	// racine du DOM
+	// Analyse du fichier XML et crÃ©ation du DOM
 
-	// Analyse du fichier XML et création du DOM
+    if ( !dom.LoadFile() ) {
+        throw "XML file '" + xml_file + "' cannot be analyzed. " + dom.ErrorDesc();
+    }
 
-	if ( !dom.LoadFile() )
-		throw string("XML file '" + xml_file
-		                          + "' cannot be analyzed. "
-		                          + dom.ErrorDesc());
-
-
-	cout << "Analyse du fichier '" << xml_file
-          << "' et création du DOM OK" << endl;
-
-	cout << "--- Contenu du document ---" << endl;
 
 	p_root = dom.FirstChildElement("bookstore");	// ou: p_root = doc.FirstChild()->ToElement();
 	cout << "Racine: " << p_root->ValueStr() << endl;
