@@ -2,27 +2,23 @@
 #include <cassert>
 
 namespace {
-    const double DEFAULT_VAL_LOW(0.);
-    const double DEFAULT_VAL_HIGH(1.);
-    const double DEFAULT_DELAY(0.);
-    //const double DEFAULT_PHASE(0.);
-    const double DEFAULT_RISE(0.);
-    const double DEFAULT_WIDTH(0.5);
-    const double DEFAULT_FALL(0.);
-
-    const double EPSILON_ZERO(1e-9);
+    const double EPSILON_ZERO(1e-9); // for double comparisons
 }
 
-PulsePhenomenon::PulsePhenomenon()
-                            : Phenomenon(), val_low_(DEFAULT_VAL_LOW), 
-                              val_high_(DEFAULT_VAL_HIGH), t_delay_(DEFAULT_DELAY),
-                              t_rise_(DEFAULT_RISE), p_high_(DEFAULT_WIDTH), 
-                              t_fall_(DEFAULT_FALL), period_(2*DEFAULT_WIDTH) {}
-
 /** Initialize a phenomenon wich create a pulsed response
+ * @param low low value of the pulse
+ * @param high high value of the pulse
+ * @param p_width time the pulse stays high
+ * @param period period ot the entire pulse
+ * @param rise time the pulse takes to go from low to high
+ * @param fall time the pulse takes to go from high to low
+ * @param delay initial delay of the pulse, it will stay at 'low'
+ *              during this time
  */
-PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high, double delay,
-                                 double rise, double p_width, double fall, double period)
+PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high,
+                                 double p_width, double period,
+                                 double rise, double fall,
+                                 double delay)
                                 : Phenomenon(pState), val_low_(low), val_high_(high),
                                   t_delay_(delay), t_rise_(rise), p_high_(p_width), 
                                   t_fall_(fall), period_(period) {
@@ -45,7 +41,7 @@ double PulsePhenomenon::gen_val_phen(double time) {
     } else {
         time -= t_delay_;
         time -= static_cast<int>(time/period_) * period_; // fall back to a single period
-        assert(time <=period_);
+        assert(time <=period_); // small debug check
 
         if ( t_rise_>EPSILON_ZERO && time<t_rise_ ) {
             val_phen = val_low_ + (val_high_-val_low_)/(t_rise_)*(time);

@@ -6,10 +6,6 @@ namespace {
     const double DEFAULT_SIGMA(.0); // standard deviation
 }
 
-/** Default constructor, should not be called explicitly */
-Phenomenon::Phenomenon() : Agent(), pState_(NULL), 
-                           standard_deviation_(DEFAULT_SIGMA) {}
-
 /**
  * @param pState state to influence
  */
@@ -25,6 +21,14 @@ void Phenomenon::refresh (double time) {
 	}
 }
 
+
+/** Set random variation on phenomenon output based on a normal distribution
+ * @param sigma standard deviation of the variation to apply
+ *
+ * If not called, sigma is 0, hence no noise is added.
+ * Otherwise the output for a given time is normaly distributed arround
+ * the classic output (with the given standard deviation)
+ */
 void Phenomenon::set_standard_deviation(double sigma) {
     standard_deviation_ = sigma;
 }

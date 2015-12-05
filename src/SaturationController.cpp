@@ -1,18 +1,12 @@
 #include "SaturationController.h"
 
-namespace {
-    const double DEFAULT_VAL_SAT(.0);
-}
-
-/** Default constructor, should not be called explicitly */
-SaturationController::SaturationController() : Controller(), val_sat_(DEFAULT_VAL_SAT) {}
-
 /** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to
- * @param val_sat the highest value the controler can have
+ * @param val_sat val to output if state above this value
  *
- * It is an actif controller, as it will maybe influence the state
+ * Act as a dumb cooler
+ *
  * @see SaturationController::refresh
  */
 SaturationController::SaturationController(State* pState, Server* pServer, double val_sat)

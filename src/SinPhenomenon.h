@@ -3,19 +3,27 @@
 
 #include "Phenomenon.h"
 
+/** Constants used by the SinPhenomenon constructor
+ * @see SinPhenomenon
+ */
+namespace SinPhen {
+    const double DEFAULT_OFFSET(0.);
+    const double DEFAULT_PHASE(0.);
+    const double MIN_PERIOD(1e-9); ///< Minimum period size
+}
+
 class SinPhenomenon: public Phenomenon {
     public:
-        SinPhenomenon();
-		SinPhenomenon(State* pState, double period, double offset, double ampl, double phase,
-                      double sat_min, double sat_max);
+		SinPhenomenon(State* pState, double amplitude, double period,
+                      double offset = SinPhen::DEFAULT_OFFSET,
+                      double phase = SinPhen::DEFAULT_PHASE);
+        
         virtual ~SinPhenomenon();
     private:
-        double period_;
-        double offset_;
+        double period_; ///< period of the sine wave
+        double offset_; ///< offset of the sine wave
         double ampl_; ///< amplitude of the sinusoid
-        double phase_;
-        double sat_min_; ///< lowest value the phenomenon can take
-        double sat_max_; ///< highest value the phenomenon can take
+        double phase_; ///< phase in radian of the sine
     protected:
         virtual double gen_val_phen(double time);
 };

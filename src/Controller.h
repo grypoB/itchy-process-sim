@@ -6,7 +6,6 @@
 
 class Controller: public Agent {
     public:
-        Controller();
         Controller(State* pState, Server* pServer);
         virtual ~Controller();
 

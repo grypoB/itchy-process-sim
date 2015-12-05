@@ -7,33 +7,20 @@
 
 
 namespace {
-    const double DEFAULT_MIN(0.);
-    const double DEFAULT_MAX(100.);
     const double PI2(6.283185307179586);
-    const double DEFAULT_OFFSET(0.);
-    const double DEFAULT_PHASE(0.);
-    const double DEFAULT_PERIOD(1.);
-    const double DEFAULT_AMPLITUDE(0.);
-    const double SAT_MAX(DBL_MAX);
-    const double SAT_MIN(-DBL_MAX);
 }
 
-SinPhenomenon::SinPhenomenon()
-                            : Phenomenon(), period_(DEFAULT_PERIOD),
-                              offset_(DEFAULT_OFFSET), ampl_(DEFAULT_AMPLITUDE),
-                              phase_(DEFAULT_PHASE), sat_min_(SAT_MIN), 
-                              sat_max_(SAT_MAX) {}
-
-/** Initialize a phenomenon wich create a sinusoid
+/** Initialize a phenomenon wich creates a sinusoid
+ * @param amplitudw amplitude of the sine wave
+ * @param period period of the sine (needs to be above SinPhen::MIN_PERIOD)
+ * @param offset offset to apply to the sine wave
+ * @param phase phase (in radian) of the sine
  */
-SinPhenomenon::SinPhenomenon(State* pState, double period, double offset, 
-                             double ampl, double phase, double sat_min, 
-                             double sat_max) 
+SinPhenomenon::SinPhenomenon(State* pState, double amplitude, double period,
+                             double offset, double phase)
                             : Phenomenon(pState), period_(period),
-                              offset_(offset), ampl_(ampl), phase_(phase), 
-                              sat_min_(sat_min), sat_max_(sat_max) {
-    assert(period_ > 0.);
-    assert(sat_min_ <= sat_max_);
+                              offset_(offset), ampl_(amplitude), phase_(phase) {
+    assert(period>=SinPhen::MIN_PERIOD);
 }
 
 SinPhenomenon::~SinPhenomenon() {}
@@ -41,15 +28,5 @@ SinPhenomenon::~SinPhenomenon() {}
 /** Return a sinusoid
  */
 double SinPhenomenon::gen_val_phen(double time) {
-    double val_phen(offset_ + ampl_*sin(PI2*(time + phase_)/period_));
-
-    if(val_phen < sat_min_) {
-        return sat_min_;
-    }
-    else if(val_phen > sat_max_) {
-        return sat_max_;
-    }
-    else {
-        return val_phen;
-    }
+    return offset_ + ampl_*sin(PI2*(time + phase_)/period_);
 }

@@ -14,10 +14,10 @@ int main () {
     cout << "Server OK" << endl;
     State s(0.1,0.1,20);
     cout << "State OK" << endl;
-    SinPhenomenon p(&s, 100., 0., 20.,0., -1000., 1000.);
-    //p.set_standard_deviation(1);
+    SinPhenomenon p(&s, 100., 50.);
+    p.set_standard_deviation(10);
     cout << "Phenomenon OK" << endl;
-    OnOffController c(&s, &server, 0 ,10,20,-20);
+    OnOffController c(&s, &server, 0 ,10,30,-30);
     c.set_legend_keys("room temperature",
                        "outside temperature",
                        "controller");

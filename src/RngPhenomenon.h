@@ -5,7 +5,6 @@
 
 class RngPhenomenon: public Phenomenon {
     public:
-        RngPhenomenon();
         RngPhenomenon(State* pState, double min, double max);
         virtual ~RngPhenomenon();
     private:

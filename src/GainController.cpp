@@ -5,16 +5,12 @@ namespace {
     const double DEFAULT_GAIN(1.);
 }
 
-/** Default constructor, should not be called explicitly */
-GainController::GainController() : Controller(), val_ref_(DEFAULT_VAL_REF), gain_(DEFAULT_GAIN) {}
-
 /** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to
  * @param val_ref value Controller wants to approach
  * @param gain factor of the reaction of Controller
  *
- * It is an actif controller, as it will maybe influence the state
  * @see GainController::refresh
  */
 GainController::GainController(State* pState, Server* pServer, double val_ref, double gain)

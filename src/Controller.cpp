@@ -7,10 +7,6 @@ namespace {
     const unsigned int NB_AGENT = 3;
 }
 
-/** Default constructor, should not be called explicitly */
-Controller::Controller() : Agent(), pState_(0), pServer_(0),
-                           legend_keys_(NB_AGENT, "") {}
-
 /** Create a passif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to

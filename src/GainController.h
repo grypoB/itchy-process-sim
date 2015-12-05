@@ -5,7 +5,6 @@
 
 class GainController: public Controller {
     public:
-        GainController();
         GainController(State* pState, Server* pServer, double val_ref, double gain);
         virtual ~GainController();
 

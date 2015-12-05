@@ -5,7 +5,6 @@
 
 class SaturationController: public Controller {
     public:
-        SaturationController();
         SaturationController(State* pState, Server* pServer, double val_sat);
         virtual ~SaturationController();
 
