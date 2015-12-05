@@ -35,7 +35,7 @@ int main () {
     cout << "Here we go" << endl;
     cout << "----------------------------------------" << endl << endl;
 
-    sim.run(200,100);
+    sim.run(300,1000);
     
     cout << "----------------------------------------" << endl;
     cout << "Hope you enjoyed the simulation"  << endl;
