@@ -1,4 +1,9 @@
 #include "Simulator.h"
+#include <string>
+
+namespace {
+    const double POSITIVE_DURATION(.0);
+}
 
 Simulator::Simulator() : pAgents_(0) {}
 
@@ -20,6 +25,10 @@ void Simulator::addAgent(Agent& agent) {
 void Simulator::run(double simDuration, unsigned int nbTicks) {
 	double lenghtTick(simDuration/nbTicks);
     double time(lenghtTick); // begin at t=lenghtTick>0
+
+    if (simDuration < POSITIVE_DURATION) {
+        throw std::string ("The duration used in simulator is negative");
+    }
 
     for (unsigned int i=0 ; i<pAgents_.size() ; i++) {
         pAgents_.at(i)->init(); // equivalent to t=0
