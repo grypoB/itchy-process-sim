@@ -1,10 +1,5 @@
 #include "GainController.h"
 
-namespace {
-    const double DEFAULT_VAL_REF(.0);
-    const double DEFAULT_GAIN(1.);
-}
-
 /** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to

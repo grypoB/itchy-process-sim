@@ -9,10 +9,6 @@ namespace {
 
 // --------------------------------------------------------------------------
 // Constructors / Destructors
-/** Default constructor, should not be called explicitly */
-State::State()
-            : Agent(),  i_phen_(I_MAX), i_ctrl_(I_MAX), val_phen_(DEFAULT),
-              val_ctrl_(DEFAULT), val_state_(DEFAULT), prevTime_(DEFAULT) {}
 
 /** Construct a ready to use state
  *  @param i_phen, i_ctrl influence factor of respectively phenomenon and

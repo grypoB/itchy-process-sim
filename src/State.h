@@ -5,7 +5,6 @@
 
 class State: public Agent {
     public:
-        State();
         State(double i_phen, double i_ctrl, double init_state_val);
         virtual ~State();
 
