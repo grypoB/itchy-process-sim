@@ -12,7 +12,7 @@ int main () {
 
     Server server("log.csv");
     cout << "Server OK" << endl;
-    State s(0.1,0.1,20);
+    State s(0.1,0.1,20, -1000, 1000);
     cout << "State OK" << endl;
     SinPhenomenon p(&s, 100., 50.);
     p.set_standard_deviation(10);

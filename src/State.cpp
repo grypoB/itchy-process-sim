@@ -1,5 +1,6 @@
 #include "State.h"
 #include <cassert>
+#include <string>
 
 namespace {
     const double I_MAX(1.); // influence factor max/min
@@ -13,18 +14,33 @@ namespace {
 /** Construct a ready to use state
  *  @param i_phen, i_ctrl influence factor of respectively phenomenon and
  *         controller that might affect it
+ *  @param val_state_min, val_state_max minimum and maximum value the state
+ *         can have
  *  @param init_state_val initial value of the state (at t=0)
  */
-State::State(double i_phen, double i_ctrl, double init_state_val)
-            : Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl), val_phen_(DEFAULT),
-              val_ctrl_(DEFAULT), val_state_(init_state_val),
-              prevTime_(DEFAULT) {
+State::State(double i_phen, double i_ctrl, double init_state_val, 
+             double val_state_min, double val_state_max)
+            : Agent(), i_phen_(i_phen),  i_ctrl_(i_ctrl), 
+              val_state_min_(val_state_min), val_state_max_(val_state_max),
+              val_phen_(DEFAULT), val_ctrl_(DEFAULT), 
+              val_state_(init_state_val), prevTime_(DEFAULT) {
         
-    assert(i_phen>=I_MIN);
-    assert(i_phen<=I_MAX);
-    
-    assert(i_ctrl>=I_MIN);
-    assert(i_ctrl<=I_MAX);
+    if (i_phen <= I_MIN || i_phen > I_MAX) { // TODO : inclure le facteur 0 dans l'interval ? (contraire au model du prof) 
+        throw std::string("The phenomenon's influence factor doesn't belong" 
+                           " to ]0,1]");
+    }
+    else if (i_ctrl <= I_MIN || i_ctrl > I_MAX) { // TODO : inclure le facteur 0 dans l'interval ? (contraire au model du prof) 
+        throw std::string("The controller's influence factor doesn't belong" 
+                           " to ]0,1]");
+    }
+
+    if (val_state_ > val_state_max_)
+    {
+        val_state_ = val_state_max_;
+    }
+    else if (val_state_ < val_state_min_) {
+        val_state_ = val_state_min_;
+    }
 }
 
 State::~State() {}
