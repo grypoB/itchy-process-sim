@@ -1,8 +1,10 @@
 #include "PulsePhenomenon.h"
+#include <string>
 #include <cassert>
 
 namespace {
     const double EPSILON_ZERO(1e-9); // for double comparisons
+    const double POSITIVE_TIME(.0);
 }
 
 /** Initialize a phenomenon wich create a pulsed response
@@ -22,11 +24,21 @@ PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high,
                                 : Phenomenon(pState), val_low_(low), val_high_(high),
                                   t_delay_(delay), t_rise_(rise), p_high_(p_width), 
                                   t_fall_(fall), period_(period) {
-    assert(t_delay_ >= .0);
-    assert(t_rise_  >= .0);
-    assert(t_fall_  >= .0);
-    assert(p_high_  >= .0);
-    assert(period_   >= t_rise_+t_fall_+p_high_);
+    if (t_delay_ < POSITIVE_TIME) {
+        throw std::string ("The delay of the pulsed phenomenon is negative");
+    }
+    if (t_rise_ < POSITIVE_TIME) {
+        throw std::string ("The delay of the pulsed phenomenon is negative");
+    }
+    if (t_fall_ < POSITIVE_TIME) {
+        throw std::string ("The delay of the pulsed phenomenon is negative");
+    }
+    if (p_high_ < POSITIVE_TIME) {
+        throw std::string ("The delay of the pulsed phenomenon is negative");
+    }
+    if (period_ < t_rise_+t_fall_+p_high_) {
+        throw std::string ("The delay of the pulsed phenomenon is negative");
+    }
 }
 
 PulsePhenomenon::~PulsePhenomenon() {}
