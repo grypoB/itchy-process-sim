@@ -28,16 +28,18 @@ PulsePhenomenon::PulsePhenomenon(State* pState, double low, double high,
         throw std::string ("The delay of the pulsed phenomenon is negative");
     }
     if (t_rise_ < POSITIVE_TIME) {
-        throw std::string ("The delay of the pulsed phenomenon is negative");
+        throw std::string ("The time of rise of the pulsed phenomenon is negative");
     }
     if (t_fall_ < POSITIVE_TIME) {
-        throw std::string ("The delay of the pulsed phenomenon is negative");
+        throw std::string ("The time of fall of the pulsed phenomenon is negative");
     }
     if (p_high_ < POSITIVE_TIME) {
-        throw std::string ("The delay of the pulsed phenomenon is negative");
+        throw std::string ("The period of the high value of the pulsed phenomenon "
+                           "is negative");
     }
     if (period_ < t_rise_+t_fall_+p_high_) {
-        throw std::string ("The delay of the pulsed phenomenon is negative");
+        throw std::string ("The total period of the pulsed phenomenon is lower than"
+                           " the sum of other period");
     }
 }
 
