@@ -5,14 +5,23 @@
 #include "Simulator.h"
 #include "OnOffController.h"
 #include "SinPhenomenon.h"
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
 
-int main () {
+int main (int argc, char *argv[]) {
     using namespace std;
+
+    string inputXml("xml/sim.xml");
+
+    if (argc==2) {
+        inputXml = argv[1];
+    }
 
     try{
 
         std::cout << "Initialization..." << std::endl;
-        xml_parser("sim.xml");
+        xml_parser(inputXml);
         cout << "Here we go" << endl;
         cout << "----------------------------------------" << endl << endl;
         cout << "----------------------------------------" << endl;
@@ -20,7 +29,8 @@ int main () {
         cout << "Run >> gnuplot -persist gnuplot.conf << to see the graph of the simulation" << endl;
 
     } catch (string &s) {
-        cout << s << endl;
+        cout << "ERROR" << endl << endl;
+        cout << "ERROR: " << s << endl;
     }
 
     /*

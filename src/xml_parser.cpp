@@ -41,7 +41,7 @@ namespace {
                     get_elem_dbl(pPhen, "period"),
                     get_elem_dbl(pPhen, "rise",
                         false, PulsePhen::DEFAULT_RISE),
-                    get_elem_dbl(pPhen, "phase",
+                    get_elem_dbl(pPhen, "fall",
                         false, PulsePhen::DEFAULT_FALL),
                     get_elem_dbl(pPhen, "delay",
                         false, PulsePhen::DEFAULT_DELAY));
@@ -61,7 +61,6 @@ namespace {
     Controller* parse_ctrl(TiXmlElement* pCtrl, State *state, Server *server) {
         Controller* ctrl(NULL);
         string type;
-        TiXmlElement* pLegend = check_elem(pCtrl, "legend");
 
         type = get_attr_str(pCtrl, "type");
 
@@ -87,6 +86,7 @@ namespace {
             
         }
 
+        TiXmlElement* pLegend = check_elem(pCtrl, "legend");
         ctrl->set_legend_keys(get_elem_str(pLegend, "state"),
                 get_elem_str(pLegend, "phen", false, ""),
                 get_elem_str(pLegend, "ctrl", false, ""));
