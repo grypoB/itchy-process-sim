@@ -1,8 +1,7 @@
+#include <cmath>
+#include <string>
 #include "SinPhenomenon.h"
 #include "random.h"
-#include <cmath>
-#include <cfloat>
-#include <string>
 
 
 

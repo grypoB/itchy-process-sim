@@ -1,6 +1,6 @@
-#include "PulsePhenomenon.h"
 #include <string>
 #include <cassert>
+#include "PulsePhenomenon.h"
 
 namespace {
     const double EPSILON_ZERO(1e-9); // for double comparisons

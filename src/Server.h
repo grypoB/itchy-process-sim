@@ -1,11 +1,11 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-#include "Agent.h"
 #include <string>
 #include <vector>
 #include <fstream>
 #include <map>
+#include "Agent.h"
 
 /** Constants used by Server constructor
  */

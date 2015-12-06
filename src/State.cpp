@@ -1,6 +1,6 @@
-#include "State.h"
 #include <cassert>
 #include <string>
+#include "State.h"
 
 namespace {
     const double I_MAX(1.); // influence factor max/min

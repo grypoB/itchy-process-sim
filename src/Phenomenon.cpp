@@ -1,23 +1,39 @@
 #include <cstddef>
+#include <cfloat>
 #include "Phenomenon.h"
 #include "random.h"
 
 namespace {
     const double DEFAULT_SIGMA(.0); // standard deviation
+    const double DEFAULT_VAL_PHEN_MAX(DBL_MAX);
+    const double DEFAULT_VAL_PHEN_MIN(-DBL_MAX);
 }
 
 /**
  * @param pState state to influence
  */
 Phenomenon::Phenomenon(State* pState) : Agent(), pState_(pState),
-                                        standard_deviation_(DEFAULT_SIGMA) {}
+                                        standard_deviation_(DEFAULT_SIGMA),
+                                        val_phen_min_(DEFAULT_VAL_PHEN_MIN),
+                                        val_phen_max_(DEFAULT_VAL_PHEN_MAX) {}
 
 Phenomenon::~Phenomenon() {}
 
+
 void Phenomenon::refresh (double time) {
+	double val_phen;
 	if (pState_ != NULL) {
-       	pState_->set_val_phen(Rand::normal_dist(gen_val_phen(time),
-                                                standard_deviation_));
+       	val_phen = Rand::normal_dist(gen_val_phen(time), standard_deviation_);
+        
+        if (val_phen < val_phen_min_) {
+        	pState_->set_val_phen(val_phen_min_);
+        }
+        else if (val_phen > val_phen_max_) {
+         	pState_->set_val_phen(val_phen_max_);       	
+        }
+        else {
+        	pState_->set_val_phen(val_phen);
+        }
 	}
 }
 
@@ -31,4 +47,17 @@ void Phenomenon::refresh (double time) {
  */
 void Phenomenon::set_standard_deviation(double sigma) {
     standard_deviation_ = sigma;
+}
+
+
+/** Set the boundaries of the interval wherein the phenomenon value must be
+ * @param val_phen_min, val_phen_max respectively the lower and the upper
+ *        limit of the interval
+ *
+ * If not called, they take the minimum/maximum value possible for the 
+ * type double 
+ */
+void Phenomenon::set_boundaries(double val_phen_min, double val_phen_max) {
+    val_phen_min_ = val_phen_min;
+    val_phen_max_ = val_phen_max;
 }

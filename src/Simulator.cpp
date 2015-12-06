@@ -1,5 +1,5 @@
-#include "Simulator.h"
 #include <string>
+#include "Simulator.h"
 
 namespace {
     const double POSITIVE_DURATION(.0);

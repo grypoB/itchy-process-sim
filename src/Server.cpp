@@ -1,6 +1,6 @@
-#include "Server.h"
 #include <iostream>
 #include <sstream>
+#include "Server.h"
 
 namespace {
     const std::string TIME("t");
