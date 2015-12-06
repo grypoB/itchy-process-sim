@@ -70,7 +70,9 @@ main.o: src/main.cpp src/xml_parser.h src/Simulator.h src/Agent.h \
   src/SinPhenomenon.h src/Phenomenon.h
 random.o: src/random.cpp src/random.h
 xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/tinyxml/tinyxml.h \
-  src/xml_utils.h
+  src/xml_utils.h src/OnOffController.h src/Controller.h src/State.h \
+  src/Agent.h src/Server.h src/SinPhenomenon.h src/Phenomenon.h \
+  src/Simulator.h
 tinystr.o: src/tinyxml/tinystr.cpp src/tinyxml/tinystr.h
 tinyxml.o: src/tinyxml/tinyxml.cpp src/tinyxml/tinyxml.h
 tinyxmlerror.o: src/tinyxml/tinyxmlerror.cpp src/tinyxml/tinyxml.h

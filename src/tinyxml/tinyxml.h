@@ -291,12 +291,12 @@ protected:
 
 	inline static bool IsWhiteSpace( char c )		
 	{ 
-		return ( isspace( (unsigned char) c ) || c == '\n' || c == '\r' ); 
+		return ( isspace(  static_cast<unsigned char>(c) ) || c == '\n' || c == '\r' ); 
 	}
 	inline static bool IsWhiteSpace( int c )
 	{
 		if ( c < 256 )
-			return IsWhiteSpace( (char) c );
+			return IsWhiteSpace( static_cast<char>(c));
 		return false;	// Again, only truly correct for English/Latin...but usually works.
 	}
 
@@ -999,7 +999,7 @@ public:
 		double d;
 		int result = QueryDoubleAttribute( name, &d );
 		if ( result == TIXML_SUCCESS ) {
-			*_value = (float)d;
+			*_value = static_cast<float>(d);
 		}
 		return result;
 	}

@@ -5,6 +5,11 @@
 
     <zone>
         <controller type="">
+            <legend>
+                <ctrl></ctrl>
+                <phen> </phen>
+                <state> </state>
+            </legend>
         </controller>
         <phenomenon type="">
         </phenomenon>
@@ -16,6 +21,7 @@
     </zone>
 
      ========== Controller formats ===================
+     Don't forget the legend tag
         <controller type="OnOff">
             <threshold_low>  </threshold_low>
             <threshold_high> </threshold_high>
@@ -63,7 +69,7 @@
 
 
 
-<sim duration="300" nbTicks="100000">
+<sim duration="300" nbTicks="30000">
     <zone>
         <controller type="OnOff">
             <threshold_low>  -10</threshold_low>
@@ -81,8 +87,8 @@
             <period>100 </period> 
         </phenomenon>
         <state>
-            <i_phen>0.5 </i_phen>
-            <i_ctrl>0.5 </i_ctrl>
+            <i_phen>0.3 </i_phen>
+            <i_ctrl>0.8 </i_ctrl>
             <initial_value>0 </initial_value>
         </state>
     </zone>

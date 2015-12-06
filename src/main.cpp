@@ -9,8 +9,20 @@
 int main () {
     using namespace std;
 
-    std::cout << "Initialization..." << std::endl;
-    xml_parser("sim.xml");
+    try{
+
+        std::cout << "Initialization..." << std::endl;
+        xml_parser("sim.xml");
+        cout << "Here we go" << endl;
+        cout << "----------------------------------------" << endl << endl;
+        cout << "----------------------------------------" << endl;
+        cout << "Hope you enjoyed the simulation"  << endl;
+        cout << "Run >> gnuplot -persist gnuplot.conf << to see the graph of the simulation" << endl;
+
+    } catch (string &s) {
+        cout << s << endl;
+    }
+
     /*
     Server server("log.csv");
     cout << "Server OK" << endl;
