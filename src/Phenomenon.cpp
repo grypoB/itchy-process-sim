@@ -2,15 +2,11 @@
 #include "Phenomenon.h"
 #include "random.h"
 
-namespace {
-    const double DEFAULT_SIGMA(.0); // standard deviation
-}
-
 /**
  * @param pState state to influence
  */
 Phenomenon::Phenomenon(State* pState) : Agent(), pState_(pState),
-                                        standard_deviation_(DEFAULT_SIGMA) {}
+                                        standard_deviation_(Phen::DEFAULT_SIGMA) {}
 
 Phenomenon::~Phenomenon() {}
 

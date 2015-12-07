@@ -3,6 +3,11 @@
 
 #include "State.h"
 
+
+namespace Phen {
+    const double DEFAULT_SIGMA(.0); // standard deviation
+}
+
 class Phenomenon: public Agent{
     public:
         Phenomenon(State* pState); ///< Initialize a phenomenon influencing a state

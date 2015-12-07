@@ -51,7 +51,9 @@ namespace {
                     get_elem_dbl(pPhen, "min"),
                     get_elem_dbl(pPhen, "max"));
         }
-        
+
+        phen->set_standard_deviation(get_elem_dbl(pPhen, "sigma",
+                                                  false, Phen::DEFAULT_SIGMA));
         cout<< "OK" << endl;
 
         return phen;
@@ -150,18 +152,22 @@ void xml_parser (string xml_file) {
 
     pZone = check_elem(pSim, "zone");
 
-    parse_zone(pZone, state, phen, ctrl, server);
-
-    zoneNB++;
-
-    for (unsigned int i=0; i<zoneNB ; i++) {
-        sim.addAgent(*phen[i]);
-        sim.addAgent(*ctrl[i]);
-        sim.addAgent(*state[i]);
+    while (pZone) {
+        parse_zone(pZone, state, phen, ctrl, server);
+        pZone = pZone->NextSiblingElement("zone");
+        cout << "new zone" << endl;
+        zoneNB++;
     }
 
-    sim.addAgent(*server);
 
-    sim.run( get_attr_dbl(pSim, "duration"), get_attr_int(pSim, "nbTicks"));
+        for (unsigned int i=0; i<zoneNB ; i++) {
+            sim.addAgent(*phen[i]);
+            sim.addAgent(*ctrl[i]);
+            sim.addAgent(*state[i]);
+        }
+
+        sim.addAgent(*server);
+
+        sim.run( get_attr_dbl(pSim, "duration"), get_attr_int(pSim, "nbTicks"));
 }
 

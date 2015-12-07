@@ -85,6 +85,7 @@
         <phenomenon type="sin">
             <amplitude>100 </amplitude> 
             <period>100 </period> 
+            <sigma>10</sigma>
         </phenomenon>
         <state>
             <i_phen>0.3 </i_phen>

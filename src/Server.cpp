@@ -119,6 +119,7 @@ void Server::introduce(std::vector<std::string> measure_name) {
     for (it = measure_name.begin(); it != measure_name.end(); it++) {
         if (it->compare("") != 0) { // check if non-empty
             data_name_.push_back(*it);
+            cout << "introduced " << *it << endl;
         }
     }
 }
