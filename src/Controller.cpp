@@ -1,4 +1,5 @@
 #include <cassert>
+#include "NumericLimit.h"
 #include "Controller.h"
 
 namespace {
@@ -14,7 +15,9 @@ namespace {
  * @see Controller::refresh
  */
 Controller::Controller(State* pState, Server* pServer)
-    : Agent(), pState_(pState), pServer_(pServer),
+    : Agent(), val_ctrl_min_(NumericLimit::DOUBLE_MIN), 
+      val_ctrl_max_(NumericLimit::DOUBLE_MAX), 
+      pState_(pState), pServer_(pServer), 
       legend_keys_(NB_AGENT, "") {}
 
 Controller::~Controller() {}
@@ -27,11 +30,20 @@ void Controller::refresh (double time) {
     double val_ctrl(.0);
 
     if (pState_!=NULL && pServer_!=NULL) {
-        
+
         val_phen  = pState_->get_val_phen() ;
         val_state = pState_->get_val_state();
-        val_ctrl = getResponse(time, val_state, val_phen);
+
         // react to state and phen value
+        val_ctrl = getResponse(time, val_state, val_phen);
+
+        if (val_ctrl < val_ctrl_min_) {
+            val_ctrl = val_ctrl_min_;
+        }
+        else if (val_ctrl > val_ctrl_max_) {
+            val_ctrl = val_ctrl_max_;
+        }
+
         pState_->set_val_ctrl(val_ctrl);
 
         // log to the server
@@ -40,7 +52,7 @@ void Controller::refresh (double time) {
         pServer_->send(legend_keys_[CTRL], val_ctrl);
     }
 
-    
+
 }
 
 
@@ -72,10 +84,14 @@ void Controller::set_legend_keys(std::string legendState,
         legend_keys_.at(CTRL) = legendCtrl;
 }
 
+void Controller::set_boundaries(double val_ctrl_min, double val_ctrl_max) {
+    val_ctrl_min_ = val_ctrl_min;
+    val_ctrl_max_ = val_ctrl_max;
+}
+
 /** Follow the value of the state
  * There are unused parameters, because it just need the value of the state
  */
 double Controller::getResponse(double, double val_state, double) {
     return val_state;
 }
-

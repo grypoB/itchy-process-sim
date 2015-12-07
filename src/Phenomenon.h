@@ -16,7 +16,7 @@ class Phenomenon: public Agent{
         State* const pState_; ///< state to influence
         /* sigma of the normal distribution of the noise to apply to the phenomenon output */
         double standard_deviation_;
-        double val_phen_min_; ///< minimum value the phenomenon can have 
+        double val_phen_min_; ///< minimum value the phenomenon can have
         double val_phen_max_; ///< maximum value the phenomenon can have
     protected:
         virtual double gen_val_phen(double time)=0; ///< Phenomenon value in function of time

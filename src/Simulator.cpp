@@ -1,10 +1,6 @@
 #include <string>
 #include "Simulator.h"
 
-namespace {
-    const double POSITIVE_DURATION(.0);
-}
-
 Simulator::Simulator() : pAgents_(0) {}
 
 /** Adds agent to refresh during the simulation
@@ -26,8 +22,12 @@ void Simulator::run(double simDuration, unsigned int nbTicks) {
 	double lenghtTick(simDuration/nbTicks);
     double time(lenghtTick); // begin at t=lenghtTick>0
 
-    if (simDuration < POSITIVE_DURATION) {
+    if (simDuration < 0) {
         throw std::string ("The duration used in simulator is negative");
+    }
+    
+    if (nbTicks < 0) {
+        throw std::string ("The number of steps in the simulation is negative");
     }
 
     for (unsigned int i=0 ; i<pAgents_.size() ; i++) {
