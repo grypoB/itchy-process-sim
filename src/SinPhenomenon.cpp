@@ -1,8 +1,7 @@
+#include <cmath>
+#include <string>
 #include "SinPhenomenon.h"
 #include "random.h"
-#include <cmath>
-#include <cfloat>
-#include <cassert>
 
 
 
@@ -20,7 +19,10 @@ SinPhenomenon::SinPhenomenon(State* pState, double amplitude, double period,
                              double offset, double phase)
                             : Phenomenon(pState), period_(period),
                               offset_(offset), ampl_(amplitude), phase_(phase) {
-    assert(period>=SinPhen::MIN_PERIOD);
+                              	
+    if (period < SinPhen::MIN_PERIOD) {
+    	throw std::string ("The period of the sinusoid is too low");
+    }
 }
 
 SinPhenomenon::~SinPhenomenon() {}

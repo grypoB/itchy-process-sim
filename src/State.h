@@ -13,14 +13,17 @@ class State: public Agent {
 
         void set_val_phen(double val_phen);
         void set_val_ctrl(double val_phen);
+        void set_boundaries(double val_state_min, double val_state_max);
 
         double get_val_phen() const;
         double get_val_state() const;
         double get_val_ctrl() const;
 
     private:
-        const double i_phen_; ///< influence factor of phenomenom in [1/s]
-        const double i_ctrl_; ///< influence factor of controller in [1/s]
+        const double i_phen_; ///< influence factor of phenomenom in [1/time]
+        const double i_ctrl_; ///< influence factor of controller in [1/time]
+        double val_state_min_; ///< minimum value of the state can have
+        double val_state_max_; ///< maximum value of the state can have
 
         double val_phen_;  ///< value of phenomenon influencing the state
         double val_ctrl_;  ///< value of the controller influencing the state

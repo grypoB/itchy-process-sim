@@ -11,10 +11,16 @@ class Controller: public Agent {
 
         virtual void refresh(double time);
         virtual void init();
-        
+
         void set_legend_keys(std::string legendState,
                              std::string legendPhen= "",
                              std::string legendCtrl= "");
+
+        void set_boundaries(double val_ctrl_min, double val_ctrl_max);
+
+    private:
+        double val_ctrl_min_;
+        double val_ctrl_max_;
 
     protected:
         State*  pState_; ///< State to control
