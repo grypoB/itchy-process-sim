@@ -84,6 +84,14 @@ void Controller::set_legend_keys(std::string legendState,
         legend_keys_.at(CTRL) = legendCtrl;
 }
 
+
+/** Set the boundaries of the interval wherein the controller value must be
+ * @param val_ctrl_min, val_ctrl_max respectively the lower and the upper
+ *        limit of the interval
+ *
+ * If not called, they take the minimum/maximum value possible for the
+ * type double
+ */
 void Controller::set_boundaries(double val_ctrl_min, double val_ctrl_max) {
     val_ctrl_min_ = val_ctrl_min;
     val_ctrl_max_ = val_ctrl_max;
