@@ -6,6 +6,7 @@
 #include "Server.h"
 #include "State.h"
 #include "Simulator.h"
+#include "NumericLimit.h"
 
 #include "OnOffController.h"
 #include "GainController.h"
@@ -54,6 +55,10 @@ namespace {
 
         phen->set_standard_deviation(get_elem_dbl(pPhen, "sigma",
                                                   false, Phen::DEFAULT_SIGMA));
+        phen->set_boundaries(get_elem_dbl(pPhen, "limit_min",
+                                false, NumericLimit::DOUBLE_MIN),
+                             get_elem_dbl(pPhen, "limit_max",
+                                false, NumericLimit::DOUBLE_MAX));
         cout<< "OK" << endl;
 
         return phen;
@@ -92,6 +97,11 @@ namespace {
         ctrl->set_legend_keys(get_elem_str(pLegend, "state"),
                 get_elem_str(pLegend, "phen", false, ""),
                 get_elem_str(pLegend, "ctrl", false, ""));
+        ctrl->set_boundaries(get_elem_dbl(pCtrl, "limit_min",
+                                false, NumericLimit::DOUBLE_MIN),
+                             get_elem_dbl(pCtrl, "limit_max",
+                                false, NumericLimit::DOUBLE_MAX));
+        ctrl->set_refresh_rate(get_elem_dbl(pCtrl, "refresh_rate", false, 0));
 
         cout<< "OK" << endl;
         return ctrl;
@@ -103,15 +113,21 @@ namespace {
         TiXmlElement*   pCtrl;
         TiXmlElement*   pPhen;
         TiXmlElement*   pState;
+        State *nState;
 
         pCtrl = check_elem(pZone, "controller"); 
         pPhen = check_elem(pZone, "phenomenon"); 
         pState = check_elem(pZone, "state"); 
 
         //init state
-        state.push_back(new State(get_elem_dbl(pState, "i_phen"),
-                    get_elem_dbl(pState, "i_ctrl"),
-                    get_elem_dbl(pState, "initial_value")));
+        nState = new State(get_elem_dbl(pState, "i_phen"),
+                           get_elem_dbl(pState, "i_ctrl"),
+                           get_elem_dbl(pState, "initial_value"));
+        nState->set_boundaries(get_elem_dbl(pState, "limit_min",
+                                false, NumericLimit::DOUBLE_MIN),
+                              get_elem_dbl(pState, "limit_max",
+                                false, NumericLimit::DOUBLE_MAX));
+        state.push_back(nState);
 
         //init phen
         phen.push_back(parse_phen(pPhen, state[state.size()-1]));

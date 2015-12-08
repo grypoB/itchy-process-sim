@@ -17,6 +17,7 @@ class Controller: public Agent {
                              std::string legendCtrl= "");
 
         void set_boundaries(double val_ctrl_min, double val_ctrl_max);
+        void set_refresh_rate(double deltaT);
 
     private:
         double val_ctrl_min_;
@@ -26,6 +27,10 @@ class Controller: public Agent {
         State*  pState_; ///< State to control
         Server* pServer_; ///< Server to send data too
         std::vector<std::string> legend_keys_; ///< Name of the agents for the server
+
+        double lastOutput_;
+        double lastTime_;
+        double refreshRate_;
 
         /** retrun how the controller respond, should be reimplement in child
          * classes
