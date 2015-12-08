@@ -1,10 +1,7 @@
-#include "xml_parser.h"
-#include "tinyxml/tinyxml.h"
-#include "xml_utils.h"
 #include <iostream>
+#include "xml_parser.h"
+#include "xml_utils.h"
 
-#include "Server.h"
-#include "State.h"
 #include "Simulator.h"
 #include "NumericLimit.h"
 
@@ -19,13 +16,17 @@
 using namespace std;
 
 namespace {
+    /** Return a pointer to a newly created Phenomenon as described by the xml tag
+     * @param pPhen pointer to the xml element
+     * @param state pointer to the State which the phenomenon will influence
+     */
     Phenomenon* parse_phen(TiXmlElement* pPhen, State *state) {
         Phenomenon* phen(NULL);
         string type;
 
         type = get_attr_str(pPhen, "type");
         if (type.compare("sin") == 0) {
-            cout<< "Sin phenomenon ... ";
+            cout<< "\t[INIT] Sin phenomenon ... ";
             phen = new SinPhenomenon(state,
                     get_elem_dbl(pPhen, "amplitude"),
                     get_elem_dbl(pPhen, "period"),
@@ -34,7 +35,7 @@ namespace {
                     get_elem_dbl(pPhen, "phase",
                         false, SinPhen::DEFAULT_PHASE));
         } else if (type.compare("pulse") == 0) {
-            cout<< "Pulsed phenomenon ... ";
+            cout<< "\t[INIT] Pulsed phenomenon ... ";
             phen = new PulsePhenomenon(state,
                     get_elem_dbl(pPhen, "low"),
                     get_elem_dbl(pPhen, "high"),
@@ -47,7 +48,7 @@ namespace {
                     get_elem_dbl(pPhen, "delay",
                         false, PulsePhen::DEFAULT_DELAY));
         } else if (type.compare("random") == 0) {
-            cout<< "Random phenomenon ... ";
+            cout<< "\t[INIT] Random phenomenon ... ";
             phen = new RngPhenomenon(state,
                     get_elem_dbl(pPhen, "min"),
                     get_elem_dbl(pPhen, "max"));
@@ -65,6 +66,11 @@ namespace {
 
     }
 
+    /** Return a pointer to a newly created controller as described by the xml tag
+     * @param pCtrl pointer to the xml element
+     * @param state pointer to the State to which the controller will be associated
+     * @param server pointer to the Server to which the controller will send data
+     */
     Controller* parse_ctrl(TiXmlElement* pCtrl, State *state, Server *server) {
         Controller* ctrl(NULL);
         string type;
@@ -72,23 +78,23 @@ namespace {
         type = get_attr_str(pCtrl, "type");
 
         if (type.compare("OnOff") == 0) {
-            cout<< "OnOff controller ... ";
+            cout<< "\t[INIT] OnOff controller ... ";
             ctrl = new OnOffController(state, server,
                     get_elem_dbl(pCtrl, "threshold_low"),
                     get_elem_dbl(pCtrl, "threshold_high"),
                     get_elem_dbl(pCtrl, "output_high"),
                     get_elem_dbl(pCtrl, "output_low"));
         } else if (type.compare("saturation") == 0) {
-            cout<< "Saturation controller ... ";
+            cout<< "\t[INIT] Saturation controller ... ";
             ctrl = new SaturationController(state, server,
                     get_elem_dbl(pCtrl, "val_sat"));
         } else if (type.compare("gain") == 0) {
-            cout<< "Gain controller ... ";
+            cout<< "\t[INIT] Gain controller ... ";
             ctrl = new GainController(state, server,
                     get_elem_dbl(pCtrl, "val_ref"),
                     get_elem_dbl(pCtrl, "gain"));
         } else { // default type
-            cout<< "Default (passif) controller ... ";
+            cout<< "\t[INIT] Default (passif) controller ... ";
             ctrl = new Controller(state, server);
             
         }
@@ -107,6 +113,13 @@ namespace {
         return ctrl;
     }
 
+    /** Parse a zone xml tag and add the created entities to the appropriate vector
+     *  @param pZone pointer to the xml tag
+     *  @param state vector in which to append the created state
+     *  @param phen vector in which to append the created phenomenon
+     *  @param ctrl vector in which to append the created controller
+     *  @param server Server to which the created controller will send data to
+     */
     void parse_zone(TiXmlElement* pZone,
                     vector<State*> &state, vector<Phenomenon*> &phen,
                     vector<Controller*> &ctrl, Server *server) {
@@ -120,6 +133,7 @@ namespace {
         pState = check_elem(pZone, "state"); 
 
         //init state
+        cout << "\t[INIT] State ... ";
         nState = new State(get_elem_dbl(pState, "i_phen"),
                            get_elem_dbl(pState, "i_ctrl"),
                            get_elem_dbl(pState, "initial_value"));
@@ -128,6 +142,7 @@ namespace {
                               get_elem_dbl(pState, "limit_max",
                                 false, NumericLimit::DOUBLE_MAX));
         state.push_back(nState);
+        cout << "OK" << endl;
 
         //init phen
         phen.push_back(parse_phen(pPhen, state[state.size()-1]));
@@ -137,7 +152,13 @@ namespace {
     }
 }
 
+/** Parse the given xml file and run the appropriate simulation
+ * @param xml_file file to read
+ *
+ * Will throw an std::string if an error is encountered
+ */
 void xml_parser (string xml_file) {
+    cout << "[SETUP] Open file ... ";
     TiXmlDocument   dom(xml_file);  // DOM
     TiXmlElement*   pSim;
     TiXmlElement*   pZone;
@@ -152,49 +173,55 @@ void xml_parser (string xml_file) {
     unsigned int zoneNB(0);
     string type("");
 
-
-
     if ( !dom.LoadFile() ) {
         throw "XML file '" + xml_file + "' cannot be analyzed. " + dom.ErrorDesc();
     }
 
     pSim = dom.FirstChildElement("sim");
+    cout << "OK" << endl;
 
+    cout << "[INIT] Server ... ";
     pServer = check_elem(pSim, "server");
     server = new Server(get_attr_str(pServer, "log",
                 false, ServerConst::DEFAULT_NAME),
             get_attr_str(pServer, "conf",
                 false, ServerConst::DEFAULT_GNUPLOT_CONF));
+    cout << "OK" << endl;
 
     pZone = check_elem(pSim, "zone");
 
+    // parse zone
     while (pZone) {
+        cout << "[INIT] Zone ... "<< endl;
         parse_zone(pZone, state, phen, ctrl, server);
         pZone = pZone->NextSiblingElement("zone");
-        cout << "new zone" << endl;
         zoneNB++;
+        cout << "OK" <<endl;;
     }
 
-
+    // prepare the sim (stack agents)
+    cout << "[INIT] Sim ... ";
     for (unsigned int i=0; i<zoneNB ; i++) {
         sim.addAgent(*phen[i]);
         sim.addAgent(*ctrl[i]);
         sim.addAgent(*state[i]);
     }
-
     sim.addAgent(*server);
+    cout << "OK" << endl;
 
-    cout << "Here we go" << endl;
-    cout << "----------------------------------------" << endl << endl;
+    // run the sim
+    cout << endl;
+    cout << "[RUN SIM] ... ";
     sim.run( get_attr_dbl(pSim, "duration"), get_attr_int(pSim, "nbTicks"));
-    cout << "----------------------------------------" << endl;
+    cout << "OK" << endl << endl;
 
     // free memory
+    cout << "[CLEANUP] Free memory ... ";
     for (unsigned int i=0; i<zoneNB ; i++) {
         delete phen[i];
         delete ctrl[i];
         delete state[i];
     }
     delete server;
+    cout << "OK" << endl;
 }
-

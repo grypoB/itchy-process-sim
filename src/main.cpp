@@ -15,10 +15,15 @@ int main (int argc, char *argv[]) {
 
     try{
 
-        std::cout << "Initialization..." << std::endl;
+        cout << "=========================================" << endl;
         xml_parser(inputXml);
-        cout << "Hope you enjoyed the simulation"  << endl;
-        cout << "Run >> gnuplot -persist gnuplot.conf << to see the graph of the simulation" << endl;
+        cout << "=========================================" << endl;
+
+        cout << endl << endl;
+        cout << "Run the following command to see the results of the simulation :" << endl;
+        cout << "$ gnuplot -persist gnuplot.conf" << endl;
+        cout << "You might want another visualization of the simulation tough." << endl;
+        cout << "Goodbye." << endl;
 
     } catch (string &s) {
         cout << "ERROR" << endl << endl;
