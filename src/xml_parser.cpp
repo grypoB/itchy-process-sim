@@ -138,11 +138,11 @@ namespace {
 }
 
 void xml_parser (string xml_file) {
-	TiXmlDocument   dom(xml_file);  // DOM
-	TiXmlElement*   pSim;
-	TiXmlElement*   pZone;
-	TiXmlElement*   pServer;
-    
+    TiXmlDocument   dom(xml_file);  // DOM
+    TiXmlElement*   pSim;
+    TiXmlElement*   pZone;
+    TiXmlElement*   pServer;
+
     vector<Controller*> ctrl;
     vector<Phenomenon*> phen;
     vector<State*> state;
@@ -176,14 +176,25 @@ void xml_parser (string xml_file) {
     }
 
 
-        for (unsigned int i=0; i<zoneNB ; i++) {
-            sim.addAgent(*phen[i]);
-            sim.addAgent(*ctrl[i]);
-            sim.addAgent(*state[i]);
-        }
+    for (unsigned int i=0; i<zoneNB ; i++) {
+        sim.addAgent(*phen[i]);
+        sim.addAgent(*ctrl[i]);
+        sim.addAgent(*state[i]);
+    }
 
-        sim.addAgent(*server);
+    sim.addAgent(*server);
 
-        sim.run( get_attr_dbl(pSim, "duration"), get_attr_int(pSim, "nbTicks"));
+    cout << "Here we go" << endl;
+    cout << "----------------------------------------" << endl << endl;
+    sim.run( get_attr_dbl(pSim, "duration"), get_attr_int(pSim, "nbTicks"));
+    cout << "----------------------------------------" << endl;
+
+    // free memory
+    for (unsigned int i=0; i<zoneNB ; i++) {
+        delete phen[i];
+        delete ctrl[i];
+        delete state[i];
+    }
+    delete server;
 }
 
