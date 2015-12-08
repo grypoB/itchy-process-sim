@@ -18,7 +18,7 @@ Controller::Controller(State* pState, Server* pServer)
     : Agent(), val_ctrl_min_(NumericLimit::DOUBLE_MIN), 
       val_ctrl_max_(NumericLimit::DOUBLE_MAX), 
       pState_(pState), pServer_(pServer), 
-      legend_keys_(NB_AGENT, "") {}
+      legend_keys_(NB_AGENT, ""), refreshRate_(0) {}
 
 Controller::~Controller() {}
 
@@ -35,7 +35,13 @@ void Controller::refresh (double time) {
         val_state = pState_->get_val_state();
 
         // react to state and phen value
-        val_ctrl = getResponse(time, val_state, val_phen);
+        if (time - lastTime_ >= refreshRate_) { // update ctrl value
+            lastTime_ = time;
+            val_ctrl = getResponse(time, val_state, val_phen);
+            lastOutput_ = val_ctrl;
+        } else { // take last outpurted value
+            val_ctrl = lastOutput_;
+        }
 
         if (val_ctrl < val_ctrl_min_) {
             val_ctrl = val_ctrl_min_;
@@ -61,6 +67,7 @@ void Controller::refresh (double time) {
 void Controller::init() {
     if(pServer_!= 0) {
         pServer_->introduce(legend_keys_);
+        lastTime_ = NumericLimit::DOUBLE_MIN;
     }
 }
 
@@ -95,6 +102,18 @@ void Controller::set_legend_keys(std::string legendState,
 void Controller::set_boundaries(double val_ctrl_min, double val_ctrl_max) {
     val_ctrl_min_ = val_ctrl_min;
     val_ctrl_max_ = val_ctrl_max;
+}
+
+/** set how fast the Controller takes descisions
+ * @param deltaT interval of time between each descisions
+ *
+ * a refresh rate in ]-infinity, 0] means the controller takes descisions every time it is called. This is the default behaviour.
+ */
+void Controller::set_refresh_rate(double deltaT) {
+    if (deltaT < 0) {
+        deltaT = 0;
+    }
+    refreshRate_ = deltaT;
 }
 
 /** Follow the value of the state

@@ -4,8 +4,6 @@
 #include "NumericLimit.h"
 
 namespace {
-    const double I_MAX(1.); // influence factor max/min
-    const double I_MIN(0.);
     const double DEFAULT(0.); // default val
 }
 

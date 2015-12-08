@@ -8,7 +8,12 @@ CXXFLAGS = -pedantic -Wall -Wextra -Wold-style-cast -Woverloaded-virtual -Wfloat
 -Wswitch-enum -Wundef -Winline -Wsign-conversion
 # -std=c++11 -Weffc++ 
 SOURCE_DIR = src/
-CPPFILES = src/SinPhenomenon.cpp src/PulsePhenomenon.cpp src/OnOffController.cpp src/GainController.cpp src/SaturationController.cpp src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp
+CPPFILES = src/SinPhenomenon.cpp src/PulsePhenomenon.cpp src/OnOffController.cpp src/GainController.cpp src/SaturationController.cpp src/Controller.cpp src/Phenomenon.cpp src/RngPhenomenon.cpp src/Server.cpp src/Simulator.cpp src/State.cpp src/main.cpp src/random.cpp \
+src/xml_parser.cpp \
+src/tinyxml/tinystr.cpp \
+src/tinyxml/tinyxml.cpp \
+src/tinyxml/tinyxmlerror.cpp \
+src/tinyxml/tinyxmlparser.cpp
 OFILES = $(CPPFILES:.cpp=.o)
 
 # Definition de la premiere regle
@@ -51,16 +56,25 @@ GainController.o: src/GainController.cpp src/GainController.h \
 SaturationController.o: src/SaturationController.cpp \
   src/SaturationController.h src/Controller.h src/State.h src/Agent.h \
   src/Server.h
-Controller.o: src/Controller.cpp src/Controller.h src/State.h src/Agent.h \
-  src/Server.h
-Phenomenon.o: src/Phenomenon.cpp src/Phenomenon.h src/State.h src/Agent.h \
-  src/random.h
+Controller.o: src/Controller.cpp src/NumericLimit.h src/Controller.h \
+  src/State.h src/Agent.h src/Server.h
+Phenomenon.o: src/Phenomenon.cpp src/NumericLimit.h src/Phenomenon.h \
+  src/State.h src/Agent.h src/random.h
 RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
   src/Phenomenon.h src/State.h src/Agent.h src/random.h
 Server.o: src/Server.cpp src/Server.h src/Agent.h
 Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
-State.o: src/State.cpp src/State.h src/Agent.h
-main.o: src/main.cpp src/Simulator.h src/Agent.h src/OnOffController.h \
-  src/Controller.h src/State.h src/Server.h src/SinPhenomenon.h \
-  src/Phenomenon.h
+State.o: src/State.cpp src/State.h src/Agent.h src/NumericLimit.h
+main.o: src/main.cpp src/xml_parser.h src/Simulator.h src/Agent.h \
+  src/OnOffController.h src/Controller.h src/State.h src/Server.h \
+  src/SinPhenomenon.h src/Phenomenon.h
 random.o: src/random.cpp src/random.h
+xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/tinyxml/tinyxml.h \
+  src/xml_utils.h src/Server.h src/Agent.h src/State.h src/Simulator.h \
+  src/NumericLimit.h src/OnOffController.h src/Controller.h \
+  src/GainController.h src/SaturationController.h src/SinPhenomenon.h \
+  src/Phenomenon.h src/RngPhenomenon.h src/PulsePhenomenon.h
+tinystr.o: src/tinyxml/tinystr.cpp src/tinyxml/tinystr.h
+tinyxml.o: src/tinyxml/tinyxml.cpp src/tinyxml/tinyxml.h
+tinyxmlerror.o: src/tinyxml/tinyxmlerror.cpp src/tinyxml/tinyxml.h
+tinyxmlparser.o: src/tinyxml/tinyxmlparser.cpp src/tinyxml/tinyxml.h

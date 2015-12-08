@@ -18,7 +18,7 @@ void Simulator::addAgent(Agent& agent) {
  * @param simDuration ammount of time of the total simulation
  * @param nbTicks Number of simulation ticks to do
  */
-void Simulator::run(double simDuration, unsigned int nbTicks) {
+void Simulator::run(double simDuration, int nbTicks) {
 	double lenghtTick(simDuration/nbTicks);
     double time(lenghtTick); // begin at t=lenghtTick>0
 
@@ -34,7 +34,7 @@ void Simulator::run(double simDuration, unsigned int nbTicks) {
         pAgents_.at(i)->init(); // equivalent to t=0
     }
 
-    for (unsigned int i=0 ; i<nbTicks ; i++) {
+    for (int i=0 ; i<nbTicks ; i++) {
         for (unsigned int j=0 ; j<pAgents_.size() ; j++) {
             pAgents_.at(j)->refresh(time);
         }
