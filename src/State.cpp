@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include <string>
 #include "State.h"
 #include "NumericLimit.h"
@@ -44,6 +45,12 @@ void State::refresh (double time) {
 
     val_state_ += i_phen_*dt * (val_phen_-val_state_)
                 + i_ctrl_*dt * (val_ctrl_-val_state_);
+
+    if ((i_phen_+i_ctrl_)*dt > 2) { // creates oscillations ('2' comes from noerical analysis)
+        std::cout << "[WARNING] State value propably won't make sense" << std::endl;
+    } else if ((i_phen_+i_ctrl_)*dt > 1) { // influence could be over "100%"
+        std::cout << "[WARNING] Some values of state might not have any physical meaning" << std::endl;
+    }
 
     if (val_state_ < val_state_min_) {
         val_state_ = val_state_min_;
