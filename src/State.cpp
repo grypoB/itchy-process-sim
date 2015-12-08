@@ -71,6 +71,14 @@ void State::set_val_ctrl (double val_ctrl) {
     val_ctrl_ = val_ctrl;
 }
 
+
+/** Set the boundaries of the interval wherein the state value must be
+ * @param val_state_min, val_state_max respectively the lower and the upper
+ *        limit of the interval
+ *
+ * If not called, they take the minimum/maximum value possible for the
+ * type double
+ */
 void State::set_boundaries(double val_state_min, double val_state_max) {
   val_state_min_ = val_state_min;
   val_state_max_ = val_state_max;
