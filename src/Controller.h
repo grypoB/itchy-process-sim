@@ -20,17 +20,17 @@ class Controller: public Agent {
         void set_refresh_rate(double deltaT);
 
     private:
-        double val_ctrl_min_;
-        double val_ctrl_max_;
+        double val_ctrl_min_; ///< max possible value to output
+        double val_ctrl_max_; ///< min possible value to output
 
     protected:
         State*  pState_; ///< State to control
         Server* pServer_; ///< Server to send data too
         std::vector<std::string> legend_keys_; ///< Name of the agents for the server
 
-        double lastOutput_;
-        double lastTime_;
-        double refreshRate_;
+        double lastOutput_; ///< store the last value the controller outputed (used for the refresh rate)
+        double lastTime_; ///< last time the controller took a descision
+        double refreshRate_; ///< how fast the controller should take descisions
 
         /** retrun how the controller respond, should be reimplement in child
          * classes

@@ -34,7 +34,6 @@ void Controller::refresh (double time) {
         val_phen  = pState_->get_val_phen() ;
         val_state = pState_->get_val_state();
 
-            //val_ctrl = getResponse(time, val_state, val_phen);
         // react to state and phen value
         if (time - lastTime_ >= refreshRate_) { // update ctrl value
             lastTime_ = time;
@@ -92,12 +91,21 @@ void Controller::set_legend_keys(std::string legendState,
         legend_keys_.at(CTRL) = legendCtrl;
 }
 
+
 void Controller::set_boundaries(double val_ctrl_min, double val_ctrl_max) {
     val_ctrl_min_ = val_ctrl_min;
     val_ctrl_max_ = val_ctrl_max;
 }
 
+/** set how fast the Controller takes descisions
+ * @param deltaT interval of time between each descisions
+ *
+ * a refresh rate in ]-infinity, 0] means the controller takes descisions every time it is called. This is the default behaviour.
+ */
 void Controller::set_refresh_rate(double deltaT) {
+    if (deltaT < 0) {
+        deltaT = 0;
+    }
     refreshRate_ = deltaT;
 }
 
