@@ -1,0 +1,138 @@
+<!-- 
+     ========== Zone format ===================
+
+    <zone>
+        <controller type="">
+            <legend>
+                <ctrl></ctrl>
+                <phen> </phen>
+                <state> </state>
+            </legend>
+            <limit_max> </limit_max>
+            <limit_min> </limit_min>
+        </controller>
+        <phenomenon type="">
+            <limit_max> </limit_max>
+            <limit_min> </limit_min>
+        </phenomenon>
+        <state>
+            <i_phen> </i_phen>
+            <i_ctrl> </i_ctrl>
+            <initial_value> </initial_value>
+            <limit_max> </limit_max>
+            <limit_min> </limit_min>
+        </state>
+    </zone>
+
+     ========== Controller formats ===================
+     Don't forget the legend tag
+        <controller type="OnOff">
+            <threshold_low>  </threshold_low>
+            <threshold_high> </threshold_high>
+            <output_high>    </output_high>
+            <output_low>     </output_low> 
+        </controller>
+
+        <controller type="default">
+        </controller>
+
+        <controller type="saturation">
+            <val_sat> </val_sat> 
+        </controller>
+
+        <controller type="gain">
+            <gain> </gain> 
+            <val_ref> </val_ref> 
+        </controller>
+
+     ========== Phenomenon formats ===================
+        <phenomenon type="pulse">
+            <low> </low> 
+            <high> </high> 
+            <p_width> </p_width> 
+            <period> </period> 
+
+            <rise> </rise>   optional
+            <fall> </fall>   optional
+            <delay> </delay> optional
+        </phenomenon>
+
+        <phenomenon type="sin">
+            <amplitude> </amplitude> 
+            <period> </period> 
+
+            <offset> </offset>   optional
+            <phase> </phase>   optional
+        </phenomenon>
+
+        <phenomenon type="random">
+            <min> </min> 
+            <max> </max> 
+        </phenomenon>
+-->
+
+<sim duration="48" nbTicks="480">
+    <zone>
+        <controller type="gain">
+            <gain> 5</gain> 
+            <val_ref>7 </val_ref> 
+            <legend>
+                <ctrl>Controlleur</ctrl>
+                <phen>Lumiere dans la chambre</phen>
+                <state>pH de l'aquarium</state>
+            </legend>
+            <limit_max>14 </limit_max>
+            <limit_min>0 </limit_min>
+        </controller>
+        <phenomenon type="pulse">
+            <low> 7 </low> 
+            <high>7.8 </high> 
+            <p_width>6 </p_width> 
+            <period>24 </period> 
+            <sigma>0.1</sigma>
+
+            <rise>1 </rise> 
+            <fall>6 </fall> 
+            <delay> 6</delay>
+            <limit_max>14 </limit_max>
+            <limit_min>0 </limit_min>
+        </phenomenon>
+        <state>
+            <i_phen>0.1 </i_phen>
+            <i_ctrl>0.2 </i_ctrl>
+            <initial_value>7 </initial_value>
+            <limit_max>14 </limit_max>
+            <limit_min>0 </limit_min>
+        </state>
+    </zone>
+    <zone>
+        <controller type="OnOff">
+            <threshold_low>  19</threshold_low>
+            <threshold_high>20 </threshold_high>
+            <output_high>   50 </output_high>
+            <output_low>    5 </output_low> 
+            <legend>
+                <ctrl>Climatiseur</ctrl>
+                <phen>Temperature exterieur</phen>
+                <state>Temperature de la salle</state>
+            </legend>
+            <limit_min>-273 </limit_min>
+        </controller>
+        <phenomenon type="sin">
+            <amplitude>10 </amplitude> 
+            <sigma>2 </sigma>
+            <period>24 </period> 
+            <offset>20 </offset> 
+            <phase>-7</phase>
+            <limit_min>-273 </limit_min>
+        </phenomenon>
+        <state>
+            <i_phen>0.2 </i_phen>
+            <i_ctrl>0.1 </i_ctrl>
+            <initial_value>20 </initial_value>
+            <limit_min>-273 </limit_min>
+        </state>
+    </zone>
+
+    <server log="log.dat" conf="gnuplot.conf"> </server>
+</sim>
