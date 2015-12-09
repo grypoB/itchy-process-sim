@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc **/
+
 #ifndef STATE_H_
 #define STATE_H_
 

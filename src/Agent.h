@@ -1,3 +1,5 @@
+/** @file main author : Alexandre Devienne **/
+
 #ifndef AGENT_H_
 #define AGENT_H_
 

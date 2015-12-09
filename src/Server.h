@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc & Alexandre Devienne **/
+
 #ifndef SERVER_H_
 #define SERVER_H_
 
@@ -10,6 +12,7 @@
 /** Constants used by Server constructor
  */
 namespace ServerConst {
+
     const std::string DEFAULT_NAME("JARVIS.txt");
     const std::string DEFAULT_GNUPLOT_CONF("gnuplot.conf");
 }

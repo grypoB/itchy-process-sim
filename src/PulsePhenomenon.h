@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc **/
+
 #ifndef PULSEPHENOMENON_H_
 #define PULSEPHENOMENON_H_
 

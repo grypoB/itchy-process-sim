@@ -1,3 +1,5 @@
+/** @file main author : Alexandre Devienne **/
+
 #ifndef XML_PARSER_H_
 #define XML_PARSER_H_
 

@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc **/
+
 #ifndef GAINCONTROLLER_H_
 #define GAINCONTROLLER_H_
 

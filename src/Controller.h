@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc **/
+
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 

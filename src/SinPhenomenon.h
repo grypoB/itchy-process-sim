@@ -1,3 +1,5 @@
+/** @file main author : Guillaume Duc **/
+
 #ifndef SINPHENOMENON_H_
 #define SINPHENOMENON_H_
 

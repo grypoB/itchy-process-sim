@@ -2,7 +2,7 @@
  * xml_utils.h
  *
  *  Created on: 16 nov. 2015
- *      Author: vachoux
+ *      Author: Vachoux
  */
 
 #ifndef SRC_XML_UTILS_H_

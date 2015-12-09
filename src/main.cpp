@@ -1,3 +1,5 @@
+/** @file main author : Alexandre Devienne **/
+
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>

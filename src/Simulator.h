@@ -1,3 +1,5 @@
+/** @file main author : Alexandre Devienne **/
+
 #ifndef SIMULATOR_H_
 #define SIMULATOR_H_
 

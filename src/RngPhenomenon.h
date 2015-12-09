@@ -1,3 +1,5 @@
+/** @file main author : Alexandre Devienne **/
+
 #ifndef RNGPHENOMENON_H_
 #define RNGPHENOMENON_H_
 
