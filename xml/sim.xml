@@ -1,6 +1,4 @@
 <!-- 
-     TODO add standard deviation
-     TODO add min and max for all of them
      ========== Zone format ===================
 
     <zone>
@@ -12,7 +10,6 @@
             </legend>
             <limit_max> </limit_max>
             <limit_min> </limit_min>
-            <refresh_rate> </refresh_rate> 
         </controller>
         <phenomenon type="">
             <limit_max> </limit_max>
@@ -76,14 +73,13 @@
 
 
 
-<sim duration="300" nbTicks="30000">
+<sim duration="300" nbTicks="300">
     <zone>
         <controller type="OnOff">
             <threshold_low>  -10</threshold_low>
             <threshold_high>10 </threshold_high>
             <output_high>   100 </output_high>
             <output_low>    -100 </output_low> 
-            <refresh_rate>0 </refresh_rate> 
             <legend>
                 <ctrl>ctrl</ctrl>
                 <phen>phen </phen>

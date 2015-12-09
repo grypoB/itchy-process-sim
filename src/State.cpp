@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include <string>
 #include "State.h"
 #include "NumericLimit.h"
@@ -28,6 +29,8 @@ State::State(double i_phen, double i_ctrl, double init_state_val)
     else if (i_ctrl < 0) {
         throw std::string("The controller's influence is negative");
     }
+    // influence factor above 1 are allowed, as they provide good result
+    // for short simulation deltaT
 }
 
 State::~State() {}
@@ -44,6 +47,12 @@ void State::refresh (double time) {
 
     val_state_ += i_phen_*dt * (val_phen_-val_state_)
                 + i_ctrl_*dt * (val_ctrl_-val_state_);
+
+    if ((i_phen_+i_ctrl_)*dt > 2) { // not stable simulation ('2' comes from noerical analysis)
+        std::cout << "[WARNING] [WARNING] State value isn't stable and might diverge" << std::endl;
+    } else if ((i_phen_+i_ctrl_)*dt > 1) { // influence could be over "100%"
+        std::cout << "[WARNING] Some values of state might not have any physical meaning" << std::endl;
+    }
 
     if (val_state_ < val_state_min_) {
         val_state_ = val_state_min_;

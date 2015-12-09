@@ -65,13 +65,11 @@ RngPhenomenon.o: src/RngPhenomenon.cpp src/RngPhenomenon.h \
 Server.o: src/Server.cpp src/Server.h src/Agent.h
 Simulator.o: src/Simulator.cpp src/Simulator.h src/Agent.h
 State.o: src/State.cpp src/State.h src/Agent.h src/NumericLimit.h
-main.o: src/main.cpp src/xml_parser.h src/Simulator.h src/Agent.h \
-  src/OnOffController.h src/Controller.h src/State.h src/Server.h \
-  src/SinPhenomenon.h src/Phenomenon.h
+main.o: src/main.cpp src/xml_parser.h
 random.o: src/random.cpp src/random.h
-xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/tinyxml/tinyxml.h \
-  src/xml_utils.h src/Server.h src/Agent.h src/State.h src/Simulator.h \
-  src/NumericLimit.h src/OnOffController.h src/Controller.h \
+xml_parser.o: src/xml_parser.cpp src/xml_parser.h src/xml_utils.h \
+  src/tinyxml/tinyxml.h src/Simulator.h src/Agent.h src/NumericLimit.h \
+  src/OnOffController.h src/Controller.h src/State.h src/Server.h \
   src/GainController.h src/SaturationController.h src/SinPhenomenon.h \
   src/Phenomenon.h src/RngPhenomenon.h src/PulsePhenomenon.h
 tinystr.o: src/tinyxml/tinystr.cpp src/tinyxml/tinystr.h

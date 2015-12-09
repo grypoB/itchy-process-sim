@@ -31,12 +31,12 @@ void Simulator::run(double simDuration, int nbTicks) {
     }
 
     for (unsigned int i=0 ; i<pAgents_.size() ; i++) {
-        pAgents_.at(i)->init(); // equivalent to t=0
+        pAgents_[i]->init(); // equivalent to t=0
     }
 
     for (int i=0 ; i<nbTicks ; i++) {
         for (unsigned int j=0 ; j<pAgents_.size() ; j++) {
-            pAgents_.at(j)->refresh(time);
+            pAgents_[j]->refresh(time);
         }
         time += lenghtTick;
     }
