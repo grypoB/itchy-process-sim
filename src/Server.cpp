@@ -43,7 +43,7 @@ void Server::init() {
         file_.precision(15);
         data_name_.insert(data_name_.begin(), TIME);
         for (unsigned int i=0; i<data_name_.size() ; i++) {
-            file_ << data_name_.at(i) << " ";
+            file_ << "\""<< data_name_.at(i) << "\" ";
 
             if (i==0) { // i==0 represent data_name_=time
                 conf << "plot";
