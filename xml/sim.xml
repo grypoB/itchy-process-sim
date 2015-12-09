@@ -10,7 +10,6 @@
             </legend>
             <limit_max> </limit_max>
             <limit_min> </limit_min>
-            <refresh_rate> </refresh_rate> 
         </controller>
         <phenomenon type="">
             <limit_max> </limit_max>
@@ -81,7 +80,6 @@
             <threshold_high>10 </threshold_high>
             <output_high>   100 </output_high>
             <output_low>    -100 </output_low> 
-            <refresh_rate>0 </refresh_rate> 
             <legend>
                 <ctrl>ctrl</ctrl>
                 <phen>phen </phen>
