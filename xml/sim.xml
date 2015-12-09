@@ -1,6 +1,4 @@
 <!-- 
-     TODO add standard deviation
-     TODO add min and max for all of them
      ========== Zone format ===================
 
     <zone>
@@ -76,7 +74,7 @@
 
 
 
-<sim duration="300" nbTicks="30000">
+<sim duration="300" nbTicks="300">
     <zone>
         <controller type="OnOff">
             <threshold_low>  -10</threshold_low>

@@ -107,7 +107,6 @@ namespace {
                                 false, NumericLimit::DOUBLE_MIN),
                              get_elem_dbl(pCtrl, "limit_max",
                                 false, NumericLimit::DOUBLE_MAX));
-        ctrl->set_refresh_rate(get_elem_dbl(pCtrl, "refresh_rate", false, 0));
 
         cout<< "OK" << endl;
         return ctrl;
