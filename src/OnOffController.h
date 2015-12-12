@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef ONOFFCONTROLLER_H_
 #define ONOFFCONTROLLER_H_

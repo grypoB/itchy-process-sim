@@ -36,7 +36,7 @@ namespace Rand {
     }
 
     /** Return a number which would fall into the given normal distribution
-     *  It uses the Box-Muller trasnform
+     *  It uses the Box-Muller transform
      *  @param mean mean of the normal distribution
      *  @param sigma standard deviation of the normal distribution
      */

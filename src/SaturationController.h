@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef SATURATIONCONTROLLER_H_
 #define SATURATIONCONTROLLER_H_

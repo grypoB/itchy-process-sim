@@ -5,12 +5,14 @@ namespace {
     //const double DEFAULT_SWITCH(.0);
 }
 
-/** TODO Create an actif controller with predefined relationship
+/** Create an actif controller with predefined relationship
  * @param pState the state to monitor
  * @param pServer the server to send data to
- * @param val_sat the highest value the controler can have
+ * @param threshold_low minimum tolerated value by the controller
+ * @param threshold_high maximum tolerated value by the controller
+ * @param output_high high value taken by the controller to regulated the state
+ * @param output_low low value taken by the controller to regulated the state
  *
- * It is an actif controller, as it will maybe influence the state
  * @see OnOffController::refresh
  */
 OnOffController::OnOffController(State* pState, Server* pServer,

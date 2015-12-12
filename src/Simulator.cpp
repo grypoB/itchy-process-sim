@@ -11,7 +11,8 @@ void Simulator::addAgent(Agent& agent) {
 }
 
 /** Runs a simulation
- * @desc For each ticks, calls Agent::refresh for each agent,
+ *
+ *   For each ticks, calls Agent::refresh for each agent,
  *       before starting the simulation calls Agent::init.
  *       The call order is the order they were added
  * @see Simulator::addAgent

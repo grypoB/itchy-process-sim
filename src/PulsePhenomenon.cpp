@@ -7,11 +7,12 @@ namespace {
     const double POSITIVE_TIME(.0);
 }
 
-/** Initialize a phenomenon wich create a pulsed response
+/** Initialize a phenomenon which create a pulsed response
+ * @param pState state to influence
  * @param low low value of the pulse
  * @param high high value of the pulse
  * @param p_width time the pulse stays high
- * @param period period ot the entire pulse
+ * @param period period to the entire pulse
  * @param rise time the pulse takes to go from low to high
  * @param fall time the pulse takes to go from high to low
  * @param delay initial delay of the pulse, it will stay at 'low'

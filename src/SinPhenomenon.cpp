@@ -10,10 +10,11 @@ namespace {
 }
 
 /** Initialize a phenomenon wich creates a sinusoid
- * @param amplitudw amplitude of the sine wave
+ * @param pState state to influence
+ * @param amplitude amplitude of the sine wave
  * @param period period of the sine (needs to be above SinPhen::MIN_PERIOD)
  * @param offset offset to apply to the sine wave
- * @param phase phase (in radian) of the sine
+ * @param phase delay in deltaT of the sinusoid
  */
 SinPhenomenon::SinPhenomenon(State* pState, double amplitude, double period,
                              double offset, double phase)

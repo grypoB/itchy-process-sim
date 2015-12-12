@@ -1,11 +1,12 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef STATE_H_
 #define STATE_H_
 
 #include "Agent.h"
 
-class State: public Agent {
+class State: public Agent{
     public:
         State(double i_phen, double i_ctrl, double init_state_val);
         virtual ~State();
@@ -22,7 +23,7 @@ class State: public Agent {
         double get_val_ctrl() const;
 
     private:
-        const double i_phen_; ///< influence factor of phenomenom in [1/time]
+        const double i_phen_; ///< influence factor of phenomenon in [1/time]
         const double i_ctrl_; ///< influence factor of controller in [1/time]
         double val_state_min_; ///< minimum value of the state can have
         double val_state_max_; ///< maximum value of the state can have

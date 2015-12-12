@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
@@ -6,7 +7,7 @@
 #include "State.h"
 #include "Server.h"
 
-class Controller: public Agent {
+class Controller: public Agent{
     public:
         Controller(State* pState, Server* pServer);
         virtual ~Controller();
@@ -29,7 +30,7 @@ class Controller: public Agent {
         Server* pServer_; ///< Server to send data too
         std::vector<std::string> legend_keys_; ///< Name of the agents for the server
 
-        /** retrun how the controller respond, should be reimplement in child
+        /** return how the controller respond, should be reimplement in child
          * classes
          */
         virtual double getResponse(double time, double val_state, double val_phen);

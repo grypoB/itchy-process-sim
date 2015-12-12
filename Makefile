@@ -35,7 +35,7 @@ depend:
 
 clean:
 	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
-	@/bin/rm -f $(SOURCE_DIR)/*.o *.x *.cpp~ *.h~ *.gch
+	@/bin/rm -f $(SOURCE_DIR)/*.o *.x *.cpp~ *.h~ *.gch $(SOURCE_DIR)/tinyxml/*.o
 
 vanish:
 	@echo " *** EFFACE MODULES OBJET ***"

@@ -1,4 +1,5 @@
-/** @file main author : Alexandre Devienne **/
+/** @file
+ *  @author Alexandre Devienne **/
 
 #ifndef RNGPHENOMENON_H_
 #define RNGPHENOMENON_H_
@@ -11,7 +12,7 @@ class RngPhenomenon: public Phenomenon {
         virtual ~RngPhenomenon();
     private:
         double min_; ///< minimum of phenomenon value
-        double max_; ///< maximium of phenomenon value
+        double max_; ///< maximum of phenomenon value
     protected:
         virtual double gen_val_phen(double time);
 };

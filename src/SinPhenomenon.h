@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef SINPHENOMENON_H_
 #define SINPHENOMENON_H_
@@ -25,7 +26,7 @@ class SinPhenomenon: public Phenomenon {
         double period_; ///< period of the sine wave
         double offset_; ///< offset of the sine wave
         double ampl_; ///< amplitude of the sinusoid
-        double phase_; ///< phase in radian of the sine
+        double phase_; ///< phase in deltaT of the sine
     protected:
         virtual double gen_val_phen(double time);
 };

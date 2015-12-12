@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef PHENOMENON_H_
 #define PHENOMENON_H_

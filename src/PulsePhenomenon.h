@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef PULSEPHENOMENON_H_
 #define PULSEPHENOMENON_H_
@@ -28,7 +29,7 @@ class PulsePhenomenon: public Phenomenon {
         double val_high_; ///< high value of the pulse
         double t_delay_;  ///< time before the first rise begins
         double t_rise_;   ///< time it takes to go form the lowest to the highest value
-        double p_high_;   ///< time phenomenon keep the highest value
+        double p_high_;   ///< time phenomenon keeps the highest value
         double t_fall_;   ///< time it takes to go from the highest to the lowest value
         double period_;   ///< period of the pulse
 

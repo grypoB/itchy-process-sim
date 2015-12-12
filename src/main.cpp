@@ -1,4 +1,5 @@
-/** @file main author : Alexandre Devienne **/
+/** @file
+ *  @author Alexandre Devienne **/
 
 #include <cstdlib>
 #include <cstdio>
@@ -9,7 +10,7 @@
 int main (int argc, char *argv[]) {
     using namespace std;
 
-    string inputXml("xml/sim.xml");
+    string inputXml("exemple.xml");
 
     if (argc==2) {
         inputXml = argv[1];

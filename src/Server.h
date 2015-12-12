@@ -1,4 +1,5 @@
-/** @file main author : Guillaume Duc & Alexandre Devienne **/
+/** @file
+ *  @author Guillaume Duc **/
 
 #ifndef SERVER_H_
 #define SERVER_H_
@@ -17,13 +18,13 @@ namespace ServerConst {
     const std::string DEFAULT_GNUPLOT_CONF("gnuplot.conf");
 }
 
-class Server: public Agent {
+class Server: public Agent{
     public:
         /** Create a server which will output simulation data in given the 
          * filename*/
         Server(std::string filename = ServerConst::DEFAULT_NAME,
                std::string gnuplotConfName = ServerConst::DEFAULT_GNUPLOT_CONF);
-        ~Server();
+        virtual ~Server();
 
         virtual void refresh(double time);
         virtual void init();
@@ -34,8 +35,8 @@ class Server: public Agent {
     private:
         std::string fName_; ///< name of output file to be used by gnuplot
         std::string gnuplotConfName_; ///< name of config file to be used by gnuplot
-        std::ofstream file_; ///< output stream for writting in fName_
-        std::vector<std::string> data_name_; ///< name of th data to output
+        std::ofstream file_; ///< output stream for writing in fName_
+        std::vector<std::string> data_name_; ///< name of the data to output
         std::map<const std::string, double> data_; ///< buffer of sent data
 };
 

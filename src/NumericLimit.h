@@ -1,4 +1,4 @@
-/** @file main author : Guillaume Duc **/
+/**  main author : Guillaume Duc **/
 
 #ifndef NUMERICLIMIT_H_
 #define NUMERICLIMIT_H_
